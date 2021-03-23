@@ -37,7 +37,7 @@ Klein's lab is based on an exercise by Bucknell University Assistant Professor o
 - [Gender Differences in COMPAS Scores](#gender-differences-in-compas-scores)
 - [Putting it all together](#putting-it-all-together)
 - [Critiques of the ProPublica Project](#critiques-of-the-propublica-project)
-- [Lab Notebook Questions](#lab-notebook-questions)
+- [Lab Notebook Components](#lab-notebook-components)
 
 
 # Overview
@@ -648,7 +648,7 @@ nrow(filter(df1, two_year_recid == 1))
 ```
 
 ```Python
-# percentage of rows where two_year_recid = 2
+# percentage of rows where two_year_recid = 1
 %%R
 nrow(filter(df1, two_year_recid == 1)) / nrow(df) * 100
 ```
@@ -1188,7 +1188,7 @@ plotty(female_fit, "Female")
 plotty(male_fit, "Male")
 ```
 
-104. From these plots, the *ProPublica* team determined the Compas score treats a High risk women the same as a Medium risk man.
+104. From these plots, the *ProPublica* team determined the Compas score treats a High risk woman the same as a Medium risk man.
 
 # Putting It All Together
 
@@ -1217,5 +1217,16 @@ If you're interested in exploring these critiques:
   * [preprint research article deposited with arXiv](https://arxiv.org/abs/1906.04711)
   * "[The Data Processing Error in a Prominent Fair Machine Learning Dataset](https://towardsdatascience.com/the-data-processing-error-in-the-most-prominent-fair-machine-learning-dataset-short-version-d27d8d390fea)" *Towards Data Science* (22 August 2019)
 
-# Lab Notebook Questions
+# Lab Notebook Components
 
+The lab notebook consists of a narrative that documents and describes your experience working through this lab.
+
+You can respond to/engage with the discussion questions included in the lab procedure.
+
+Other questions for the lab notebook: 
+- What challenges did you face, and how did you solve them?
+- What did you learn about machine learning through this lab?
+- How are you thinking about the *ProPublica* article and investigation after this lab?
+- Other comments/questions/observations
+
+I encourage folks to include code + screenshots as part of that narrative.
