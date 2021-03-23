@@ -91,39 +91,40 @@ Discussion questions:
 
 # Environment
 
-For the first part of the lab, we're actually going to work use RStudio syntax within Python to facilitate easier exploratory data analysis and data wrangling.
+1. For the first part of the lab, we're actually going to work use RStudio syntax within Python to facilitate easier exploratory data analysis and data wrangling.
 
-We can do this using the `rpy2` package.
+2. We can do this using the `rpy2` package.
 - [Click here for more information and documentation on the `rpy2` package](https://pypi.org/project/rpy2/)
 
-First step is to create a new Anaconda environment.
+3. First step is to create a new Anaconda environment.
 
-Launch the Anaconda Navigator.
+4. Launch the Anaconda Navigator.
 
-Click on the "Environments" option on the left-hand menu.
+5. Click on the "Environments" option on the left-hand menu.
 
-Click the "Create" icon to create a new environment.
+6. Click the "Create" icon to create a new environment.
 
-In the popup, label this new environment and make sure BOTH Python and R are selected. You may need to select `r` from the dropdown menu.
+7. In the popup, label this new environment and make sure BOTH Python and R are selected. You may need to select `r` from the dropdown menu.
 
-Click the "Create" button to create this environment.
+8. Click the "Create" button to create this environment.
 
-This process may take some time.
+9. This process may take some time.
 
-Once the new environment with Python and R is ready to go, click on the arrow next to the environment name and select the option to "Open with Jupyter Notebook."
+10. Once the new environment with Python and R is ready to go, click on the arrow next to the environment name and select the option to "Open with Jupyter Notebook."
 
-Now we have a Jupyter Notebook environment that can run both Python and RStudio.
+11. Now we have a Jupyter Notebook environment that can run both Python and RStudio.
 
-For more details on this process: ["Using the R programming language in Jupyter Notebook"](https://docs.anaconda.com/anaconda/navigator/tutorials/r-lang/) *Anaconda*
+12. For more details on this process: ["Using the R programming language in Jupyter Notebook"](https://docs.anaconda.com/anaconda/navigator/tutorials/r-lang/) *Anaconda*
 
-Our next step is to install the `rpy2` package.
+13. Our next step is to install the `rpy2` package.
 
 ```Python
 # Install a pip package in the current Jupyter kernel
 import sys
 !{sys.executable} -m pip install rpy2
 ```
-Now we can import the `rpy2` module into Python and set up what is called a "magic command" to run RStudio syntax from within our Python Jupyter Notebook.
+
+14. Now we can import the `rpy2` module into Python and set up what is called a "magic command" to run RStudio syntax from within our Python Jupyter Notebook.
 
 ```Python
 # set up rpy2 magic command
@@ -134,41 +135,41 @@ import warnings
 warnings.filterwarnings('ignore')
 ```
 
-Now, anytime we want to run RStudio code, we can start a code cell with the `%%R` magic command.
+15. Now, anytime we want to run RStudio code, we can start a code cell with the `%%R` magic command.
 
-We may run into error messages when running the previous block of code. If needed, run the code below and replace the file path with the anaconda path to R from your local computer.
+16. We may run into error messages when running the previous block of code. If needed, run the code below and replace the file path with the anaconda path to R from your local computer.
 
 ```Python
 import os
 os.environ['R_HOME'] = '/Users/<your user>/anaconda3/envs/<env name>/lib/R'
 ```
 
-A couple more R packages to load before we start bringing in the data.
+17. A couple more R packages to load before we start bringing in the data.
 ```Python
 %%R
 library(dplyr)
 library(ggplot2)
 ```
 
-"`dplyr` is a grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges:
+18. "`dplyr` is a grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges:
   * `mutate()` adds new variables that are functions of existing variables
   * `select()` picks variables based on their names.
   * `filter()` picks cases based on their values.
   * `summarise()` reduces multiple values down to a single summary.
   * `arrange()` changes the ordering of the rows.
 
-These all combine naturally with `group_by()` which allows you to perform any operation “by group”. You can learn more about them in [`vignette("dplyr")`](https://dplyr.tidyverse.org/articles/dplyr.html). As well as these single-table verbs, dplyr also provides a variety of two-table verbs, which you can learn about in [`vignette("two-table")`](https://dplyr.tidyverse.org/articles/two-table.html).” [Source: [dplyr.tidyverse.org](https://dplyr.tidyverse.org/)]
+19. These all combine naturally with `group_by()` which allows you to perform any operation “by group”. You can learn more about them in [`vignette("dplyr")`](https://dplyr.tidyverse.org/articles/dplyr.html). As well as these single-table verbs, dplyr also provides a variety of two-table verbs, which you can learn about in [`vignette("two-table")`](https://dplyr.tidyverse.org/articles/two-table.html).” [Source: [dplyr.tidyverse.org](https://dplyr.tidyverse.org/)]
 
-More dplyr documentation: [cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html)
+20. More dplyr documentation: [cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html)
 
-For more on the conceptual foundations for data transformation in `R`:
+21. For more on the conceptual foundations for data transformation in `R`:
 - [Chapter 5, "Data Transformation"](https://r4ds.had.co.nz/transform.html) in Hadley Wickham and Garrett Grolemund, [*R for Data Science: Visualize, Model, Transform, Tidy, and Import Data*](https://r4ds.had.co.nz/index.html) (O'Reilly, 2017).
 
-“R has several systems for making graphs, but `ggplot2` is one of the most elegant and most versatile. ggplot2 implements the grammar of graphics, a coherent system for describing and building graphs. With ggplot2, you can do more faster by learning one system and applying it in many places.” [[Chapter 3 “Data Visualization”](https://r4ds.had.co.nz/data-visualisation.html) in Garrett Grolemund and Hadley Wickham, *R for Data Science*]
+22. “R has several systems for making graphs, but `ggplot2` is one of the most elegant and most versatile. ggplot2 implements the grammar of graphics, a coherent system for describing and building graphs. With ggplot2, you can do more faster by learning one system and applying it in many places.” [[Chapter 3 “Data Visualization”](https://r4ds.had.co.nz/data-visualisation.html) in Garrett Grolemund and Hadley Wickham, *R for Data Science*]
 
-“`ggplot2` is a system for declaratively creating graphics, based on The Grammar of Graphics. You provide the data, tell ggplot2 how to map variables to aesthetics, what graphical primitives to use, and it takes care of the details...It’s hard to succinctly describe how ggplot2 works because it embodies a deep philosophy of visualisation. However, in most cases you start with ggplot(), supply a dataset and aesthetic mapping (with aes()). You then add on layers (like geom_point() or geom_histogram()), scales (like scale_colour_brewer()), faceting specifications (like facet_wrap()) and coordinate systems (like coord_flip()).” [[ggplot2.tidyverse.org](https://ggplot2.tidyverse.org/)]
+23. “`ggplot2` is a system for declaratively creating graphics, based on The Grammar of Graphics. You provide the data, tell ggplot2 how to map variables to aesthetics, what graphical primitives to use, and it takes care of the details...It’s hard to succinctly describe how ggplot2 works because it embodies a deep philosophy of visualisation. However, in most cases you start with ggplot(), supply a dataset and aesthetic mapping (with aes()). You then add on layers (like geom_point() or geom_histogram()), scales (like scale_colour_brewer()), faceting specifications (like facet_wrap()) and coordinate systems (like coord_flip()).” [[ggplot2.tidyverse.org](https://ggplot2.tidyverse.org/)]
 
-We're also going to install and load a few Python packages to have on hand for later in the lab.
+24. We're also going to install and load a few Python packages to have on hand for later in the lab.
 
 ```Python
 # install matplotlib
@@ -188,9 +189,9 @@ import matplotlib.pyplot as plt
 
 # Data
 
-We're going to work with two datasets in this lab, both developed and published by the *ProPublica* team.
+25. We're going to work with two datasets in this lab, both developed and published by the *ProPublica* team.
 
-`compas-scores-two-years.csv`: *ProPublica* selected fields for severity of charge, number of priors, demographics, age, sex, compas scores, and whether each person was accused of a crime within two years.
+26. `compas-scores-two-years.csv`: *ProPublica* selected fields for severity of charge, number of priors, demographics, age, sex, compas scores, and whether each person was accused of a crime within two years.
 
 ```Python
 %%R
@@ -203,9 +204,10 @@ compas_two_year_scores <- read.csv("https://raw.githubusercontent.com/kwaldenphd
 # show data dimensions
 nrow(compas_two_year_scores)
 ```
-We can see we have 52 columns/fields, and 7,214 rows/records in this dataset.
 
-We can also express these steps programatically in Python:
+27. We can see we have 52 columns/fields, and 7,214 rows/records in this dataset.
+
+28. We can also express these steps programatically in Python:
 ```Python
 data = pd.read_csv('compas-scores-two-years.csv', index_col=0)
 
@@ -222,17 +224,17 @@ pd.options.display.max_columns = None # have to do this otherwise it limits the 
 
 data.head() 
 ```
-Not all of the rows are useable for the first round of analysis.
+29. Not all of the rows are useable for the first round of analysis.
 
-The *ProPublica* team determined a number of criteria for removing missing or unusable data. 
+30. The *ProPublica* team determined a number of criteria for removing missing or unusable data. 
 
-These criteria are listed below:
+31. These criteria are listed below:
 - If the charge date of a defendants Compas scored crime was not within 30 days from when the person was arrested, we assume that because of data quality reasons, that we do not have the right offense.
 - We coded the recidivist flag -- `is_recid` -- to be -1 if we could not find a compas case at all.
 - In a similar vein, ordinary traffic offenses -- those with a `c_charge_degree` of 'O' -- will not result in Jail time are removed (only two of them).
 - We filtered the underlying data from Broward county to include only those rows representing people who had either recidivated in two years, or had at least two years outside of a correctional facility.
 
-To filter the data using these criteria:
+32. To filter the data using these criteria:
 ```Python
 %%R
 df <- dplyr::select(compas_two_year_scores, age, c_charge_degree, race, age_cat, score_text, sex, priors_count, 
@@ -245,7 +247,7 @@ df <- dplyr::select(compas_two_year_scores, age, c_charge_degree, race, age_cat,
 nrow(df)
 ```
 
-To run that filtering operation in Python, first we'll filter out those which do not have a COMPAS-scored case, as indicated by the recidivist flag `is_recid` set at -1.
+33. To run that filtering operation in Python, first we'll filter out those which do not have a COMPAS-scored case, as indicated by the recidivist flag `is_recid` set at -1.
 
 ```Python
 filterData = data[(data['is_recid'] != -1)]
@@ -253,11 +255,11 @@ filterData = data[(data['is_recid'] != -1)]
 filterData.shape
 ```
 
-Within the cases with a COMPAS score, we also need to check to see if we have the right offense. 
+34. Within the cases with a COMPAS score, we also need to check to see if we have the right offense. 
 
-So if the charge date of a defendant's COMPAS-scored crime was not within 30 days from when the person was arrested, it's best to assume that we do not have the right offense, and remove that row.
+35. So if the charge date of a defendant's COMPAS-scored crime was not within 30 days from when the person was arrested, it's best to assume that we do not have the right offense, and remove that row.
 
-So we will filter out rows where **days_b_screening_arrest** is over 30 or under -30:
+36. So we will filter out rows where **days_b_screening_arrest** is over 30 or under -30:
 
 ```Python
 filterData = data[(data['days_b_screening_arrest'] <= 30) & (data['days_b_screening_arrest'] >= -30)]
@@ -265,11 +267,11 @@ filterData = data[(data['days_b_screening_arrest'] <= 30) & (data['days_b_screen
 filterData.shape
 ```
 
-The results of both filtering processes should be the same- 52 columns or fields, and 6172 observations or rows/records.
+37. The results of both filtering processes should be the same- 52 columns or fields, and 6172 observations or rows/records.
 
 # Exploratory Data Analysis
 
-Higher COMPAS scores are slightly correlated with a longer length of stay. 
+38. Higher COMPAS scores are slightly correlated with a longer length of stay. 
 
 ```Python
 %%R
@@ -277,7 +279,7 @@ df$length_of_stay <- as.numeric(as.Date(df$c_jail_out) - as.Date(df$c_jail_in))
 cor(df$length_of_stay, df$decile_score)
 ```
 
-After filtering we have the following demographic breakdown:
+39. After filtering we have the following demographic breakdown:
 
 ```Python
 # summary of age range represented in the dataset
@@ -360,9 +362,9 @@ nrow(filter(df, two_year_recid == 1))
 nrow(filter(df, two_year_recid == 1)) / nrow(df) * 100
 ```
 
-Judges are often presented with two sets of scores from the Compas system -- one that classifies people into High, Medium and Low risk, and a corresponding decile score. 
+40. Judges are often presented with two sets of scores from the Compas system -- one that classifies people into High, Medium and Low risk, and a corresponding decile score. 
 
-*ProPublica*'s analysis found a clear downward trend in the decile scores as those scores increase for white defendants.
+41. *ProPublica*'s analysis found a clear downward trend in the decile scores as those scores increase for white defendants.
 
 ```Python
 %%R
@@ -439,17 +441,17 @@ plt.show()
 
 # Racial Bias in COMPAS
 
-These visualizations suggest that *something* is going on. 
+42. These visualizations suggest that *something* is going on. 
 
-But in order to test our intution that there is a significant difference in COMPAS scores across different racial categories, we need to run a logistic regression, comparing low scores to high scores.
+43. But in order to test our intution that there is a significant difference in COMPAS scores across different racial categories, we need to run a logistic regression, comparing low scores to high scores.
 
-After filtering out unusable rows, *ProPublica*'s next step was whether there is a significant difference in Compas scores between races. 
+44. After filtering out unusable rows, *ProPublica*'s next step was whether there is a significant difference in Compas scores between races. 
 
-They explored this question by changing some variables into factors, and running a logistic regression, comparing low scores to high scores.
+45. They explored this question by changing some variables into factors, and running a logistic regression, comparing low scores to high scores.
 
-These factor conversions were necessary because of RStudio syntax. 
+46. These factor conversions were necessary because of RStudio syntax. 
 
-The first step would be to convert the c_charge_degree, age_cat, race, sex (which are all categorical data) into factors. 
+47. The first step would be to convert the c_charge_degree, age_cat, race, sex (which are all categorical data) into factors. 
 
 ```Python
 %%R
@@ -466,7 +468,7 @@ model <- glm(score_factor ~ gender_factor + age_factor + race_factor +
 summary(model)
 ```
 
-But we can use the Patsy API, part of the Python `statsmodels` library, to embed these transformations within the forumla.
+48. But we can use the Patsy API, part of the Python `statsmodels` library, to embed these transformations within the forumla.
 
 ```Python
 # install statsmodels library
@@ -499,7 +501,8 @@ model = smf.glm(formula=formula, data=filterData, family=sm.families.Binomial())
 
 model.summary()
 ```
-This analysis found Black defendants are 45% more likely than white defendants to receive a higher score correcting for the seriousness of their crime, previous arrests, and future criminal behavior.
+
+49. This analysis found Black defendants are 45% more likely than white defendants to receive a higher score correcting for the seriousness of their crime, previous arrests, and future criminal behavior.
 
 ```Python
 %%R
@@ -507,14 +510,14 @@ control <- exp(-1.52554) / (1 + exp(-1.52554))
 exp(0.47721) / (1 - control + (control * exp(0.47721)))
 ```
 
-Women are 19.4% more likely than men to get a higher score.
+50. Women are 19.4% more likely than men to get a higher score.
 
 ```Python
 %%R
 exp(0.22127) / (1 - control + (control * exp(0.22127)))
 ```
 
-Most surprisingly, people under 25 are 2.5 times as likely to get a higher score as middle aged defendants.
+51. Most surprisingly, people under 25 are 2.5 times as likely to get a higher score as middle aged defendants.
 
 ```Python
 %%R
@@ -523,11 +526,11 @@ exp(1.30839) / (1 - control + (control * exp(1.30839)))
 
 # Risk of Violent Recidivism
 
-Compas also offers a score that aims to measure a persons risk of violent recidivism, which has a similar overall accuracy to the Recidivism score. 
+52. Compas also offers a score that aims to measure a persons risk of violent recidivism, which has a similar overall accuracy to the Recidivism score. 
 
-The *ProPublica* team used a logistic regression to test for racial bias.
+53. The *ProPublica* team used a logistic regression to test for racial bias.
 
-They used the second dataset `compas-scores-two-years-violent` to analyze the violent recidivism score.
+54. They used the second dataset `compas-scores-two-years-violent` to analyze the violent recidivism score.
 
 ```Python
 %%R
@@ -541,17 +544,17 @@ compas_two_year_scores_violent <- read.csv("https://raw.githubusercontent.com/kw
 nrow(compas_two_year_scores_violent)
 ```
 
-Again, we can see that we have 52 columns/fields, and 7,214 rows/records in this dataset.
+55. Again, we can see that we have 52 columns/fields, and 7,214 rows/records in this dataset.
 
-As before, the *ProPublica* team determined a number of criteria for removing missing or unusable data. 
+56. As before, the *ProPublica* team determined a number of criteria for removing missing or unusable data. 
 
-These criteria are listed below:
+57. These criteria are listed below:
 - If the charge date of a defendants Compas scored crime was not within 30 days from when the person was arrested, we assume that because of data quality reasons, that we do not have the right offense.
 - We coded the recidivist flag -- `is_recid` -- to be -1 if we could not find a compas case at all.
 - In a similar vein, ordinary traffic offenses -- those with a `c_charge_degree` of 'O' -- will not result in Jail time are removed (only two of them).
 - We filtered the underlying data from Broward county to include only those rows representing people who had either recidivated in two years, or had at least two years outside of a correctional facility.
 
-To filter the data using these criteria:
+58. To filter the data using these criteria:
 ```Python
 %%R
 df1 <- dplyr::select(compas_two_year_scores_violent, age, c_charge_degree, race, age_cat, v_score_text, sex, priors_count, 
@@ -596,7 +599,7 @@ print("All defendants")
 vtable(list(vrecid), list(vsurv))
 ```
 
-The *ProPublica* team found these trends were further exacerbated for Black defendants.
+59. The *ProPublica* team found these trends were further exacerbated for Black defendants.
 
 ```Python
 # show table with violent risk scores for Black defendants
@@ -612,13 +615,13 @@ is_white = is_race("Caucasian")
 vtable(list(filter(is_white, vrecid)), list(filter(is_white, vsurv)))
 ```
 
-The *ProPublica* team found that Black defendants were twice as likely to be false positives for a Higher violent score than white defendants.
+60. The *ProPublica* team found that Black defendants were twice as likely to be false positives for a Higher violent score than white defendants.
 
 ```Python
 38.14 / 18.46
 ```
 
-They also found white defendants were 63% more likely to get a lower score and commit another crime than Black defendants.
+61. They also found white defendants were 63% more likely to get a lower score and commit another crime than Black defendants.
 
 ```Python
 62.62 / 38.37
@@ -650,7 +653,7 @@ nrow(filter(df1, two_year_recid == 1))
 nrow(filter(df1, two_year_recid == 1)) / nrow(df) * 100
 ```
 
-*ProPublica*'s analysis found a clear downward trend in the violent decile scores as those scores increase for white defendants.
+62. *ProPublica*'s analysis found a clear downward trend in the violent decile scores as those scores increase for white defendants.
 
 ```Python
 %%R
@@ -671,7 +674,8 @@ show(pblack_v)
 # show second bar chart
 show(pwhite_v)
 ```
-Agin, the *ProPublica* team explored the question of racial bias by changing some variables into factors, and running a logistic regression, comparing low scores to high scores.
+
+63. Again, the *ProPublica* team explored the question of racial bias by changing some variables into factors, and running a logistic regression, comparing low scores to high scores.
 
 ```Python
 %%R
@@ -694,7 +698,7 @@ model <- glm(score_factor ~ gender_factor + age_factor + race_factor +
 summary(model)
 ```
 
-The violent score overpredicts recidivism for black defendants by 77.3% compared to white defendants.
+64. The violent score overpredicts recidivism for black defendants by 77.3% compared to white defendants.
 
 ```Python
 %%R
@@ -702,7 +706,7 @@ control <- exp(-2.24274) / (1 + exp(-2.24274))
 exp(0.65893) / (1 - control + (control * exp(0.65893)))
 ```
 
-Defendands under 25 are 7.4 times as likely to get a higher score as middle aged defendants.
+65. Defendands under 25 are 7.4 times as likely to get a higher score as middle aged defendants.
 
 ```Python
 %%R
@@ -711,40 +715,40 @@ exp(3.14591) / (1 - control + (control * exp(3.14591)))
 
 # Predictive Accuracy of COMPAS
 
-To test whether Compas scores do an accurate job of deciding whether an offender is Low, Medium or High risk,  *ProPublica* ran a Cox Proportional Hazards model. 
+66. To test whether Compas scores do an accurate job of deciding whether an offender is Low, Medium or High risk,  *ProPublica* ran a Cox Proportional Hazards model. 
 
-Northpointe, the company that created COMPAS and markets it to Law Enforcement, also ran a Cox model in their [validation study](http://cjb.sagepub.com/content/36/1/21.abstract).
+67. Northpointe, the company that created COMPAS and markets it to Law Enforcement, also ran a Cox model in their [validation study](http://cjb.sagepub.com/content/36/1/21.abstract).
 
-*ProPublica* used the counting model and removed people when they were incarcerated. 
+68. *ProPublica* used the counting model and removed people when they were incarcerated. 
 
-Due to errors in the underlying jail data, they ended up filtering out 32 rows that have an end date more than the start date. 
+69. Due to errors in the underlying jail data, they ended up filtering out 32 rows that have an end date more than the start date. 
 
-They determined that since there are 13,334 total rows in the data, such a small amount of errors would not affect the results.
+70. They determined that since there are 13,334 total rows in the data, such a small amount of errors would not affect the results.
 
 ## Proportional hazards model
 
-What is a Cox Proportional Hazards model?
+71. What is a Cox Proportional Hazards model?
 
-"**Survival analysis** is a branch of statistics for analyzing the expected duration of time until one or more events happen, such as death in biological organisms and failure in mechanical systems. This topic is called reliability theory or reliability analysis in engineering, duration analysis or duration modelling in economics, and event history analysis in sociology. Survival analysis attempts to answer certain questions, such as what is the proportion of a population which will survive past a certain time? Of those that survive, at what rate will they die or fail? Can multiple causes of death or failure be taken into account? How do particular circumstances or characteristics increase or decrease the probability of survival?" ([Wikipedia](https://en.wikipedia.org/wiki/Survival_analysis))
+72. "**Survival analysis** is a branch of statistics for analyzing the expected duration of time until one or more events happen, such as death in biological organisms and failure in mechanical systems. This topic is called reliability theory or reliability analysis in engineering, duration analysis or duration modelling in economics, and event history analysis in sociology. Survival analysis attempts to answer certain questions, such as what is the proportion of a population which will survive past a certain time? Of those that survive, at what rate will they die or fail? Can multiple causes of death or failure be taken into account? How do particular circumstances or characteristics increase or decrease the probability of survival?" ([Wikipedia](https://en.wikipedia.org/wiki/Survival_analysis))
 
-"**Proportional hazards models** are a class of survival models in statistics. Survival models relate the time that passes, before some event occurs, to one or more covariates that may be associated with that quantity of time. In a proportional hazards model, the unique effect of a unit increase in a covariate is multiplicative with respect to the hazard rate. For example, taking a drug may halve one's hazard rate for a stroke occurring, or, changing the material from which a manufactured component is constructed may double its hazard rate for failure" ([Wikipedia](https://en.wikipedia.org/wiki/Proportional_hazards_model)).
+73. "**Proportional hazards models** are a class of survival models in statistics. Survival models relate the time that passes, before some event occurs, to one or more covariates that may be associated with that quantity of time. In a proportional hazards model, the unique effect of a unit increase in a covariate is multiplicative with respect to the hazard rate. For example, taking a drug may halve one's hazard rate for a stroke occurring, or, changing the material from which a manufactured component is constructed may double its hazard rate for failure" ([Wikipedia](https://en.wikipedia.org/wiki/Proportional_hazards_model)).
 
-The Cox Proportional Hazards model was developed by British statistician Sir David Cox in the 1970s. 
+74. The Cox Proportional Hazards model was developed by British statistician Sir David Cox in the 1970s. 
 - For more background on the model: D.R. Cox, "[Regression Models and Life Tables]( http://www.jstor.org.proxy.library.nd.edu?url=https://www.jstor.org/stable/2985181)" *Journal of the Royal Statistical Society* 34:2 (1972): 187-220.
 
-The model is as regression model most often used to determine the association or relationship between patient survival time and predictor variables.
+75. The model is as regression model most often used to determine the association or relationship between patient survival time and predictor variables.
 - [For more information on the underlying math in the Cox model](https://en.wikipedia.org/wiki/Proportional_hazards_model#The_Cox_model)
 - [Examples of the Cox model used to analyze health outcomes](https://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/BS704_Survival/BS704_Survival6.html)
 
 
 ## Running the model
 
-To run this model, we need a couple of additional R packages.
+76. To run this model, we need a couple of additional R packages.
 
-The `ggfortify` package takes a curve and points object and converts it to a data frame that can be plotted using `ggplot2`.
+77. The `ggfortify` package takes a curve and points object and converts it to a data frame that can be plotted using `ggplot2`.
 - [For more on `ggfortify`](https://cran.r-project.org/web/packages/ggfortify/index.html)
 
-The `survival` package contains the definition for the Cox model (as well as other statistical models).
+78. The `survival` package contains the definition for the Cox model (as well as other statistical models).
 - [For more on `survival`](https://cran.r-project.org/web/packages/survival/index.html)
 
 ```Python
@@ -753,7 +757,7 @@ library(survival)
 library(ggfortify)
 ```
 
-We also need to load data structured for the model.
+79. We also need to load data structured for the model.
 
 ```Python
 %%R
@@ -767,9 +771,9 @@ cox_parsed <- read.csv("https://raw.githubusercontent.com/kwaldenphd/propublica-
 nrow(cox_parsed)
 ```
 
-We can see this data has 13,419 observations.
+80. We can see this data has 13,419 observations.
 
-The next step taken by the ProPublica team was filtering the data 
+81. The next step taken by the ProPublica team was filtering the data 
 
 ```Python
 %%R
@@ -790,7 +794,7 @@ grp <- cox_parsed[!duplicated(cox_parsed$id),]
 nrow(grp)
 ```
 
-The results of that filtering is 10,314 observations.
+82. The results of that filtering is 10,314 observations.
 
 ```Python
 # score ranges
@@ -817,7 +821,7 @@ model <- coxph(f, data=cox_parsed)
 summary(model)
 ```
 
-People placed in the High category are 3.5 times as likely to recidivate, and the COMPAS system's concordance 63.6%. This is lower than the accuracy quoted in the Northpoint study of 68%.
+83. People placed in the High category are 3.5 times as likely to recidivate, and the COMPAS system's concordance 63.6%. This is lower than the accuracy quoted in the Northpoint study of 68%.
 
 ```Python
 %%R
@@ -832,9 +836,9 @@ dmodel <- coxph(decile_f, data=cox_parsed)
 summary(dmodel)
 ```
 
-COMPAS's decile scores are a bit more accurate at 66%.
+84. COMPAS's decile scores are a bit more accurate at 66%.
 
-*ProPublica* tested if the algorithm behaved differently across races by including a race interaction term in the cox model.
+85. *ProPublica* tested if the algorithm behaved differently across races by including a race interaction term in the cox model.
 
 ```Python
 %%R
@@ -849,9 +853,9 @@ model <- coxph(f2, data=cox_parsed)
 print(summary(model))
 ```
 
-The *ProPublica* team found that the interaction term shows a similar disparity as the logistic regression above.
+86. The *ProPublica* team found that the interaction term shows a similar disparity as the logistic regression above.
 
-They also found high risk white defendants are 3.61 more likely than low risk white defendants, while High risk black defendants are 2.99 more likely than low.
+87. They also found high risk white defendants are 3.61 more likely than low risk white defendants, while High risk black defendants are 2.99 more likely than low.
 
 ```Python
 import math
@@ -876,7 +880,7 @@ plotty <- function(fit, title) {
 plotty(fit, "Overall")
 ```
 
-The *ProPublica* team found that Black defendants do recidivate at higher rates according to race specific Kaplan Meier plots.
+88. The *ProPublica* team found that Black defendants do recidivate at higher rates according to race specific Kaplan Meier plots.
 
 ```Python
 %%R
@@ -925,7 +929,7 @@ summary(black_fit, times=c(730))
 summary(white_fit, times=c(730))
 ```
 
-The *ProPublica* team found that race specific models had similar concordance values.
+89. The *ProPublica* team found that race specific models had similar concordance values.
 
 ```Python
 %%R
@@ -941,7 +945,7 @@ summary(coxph(f, data=white))
 summary(coxph(f, data=black))
 ```
 
-The *ProPublica* team found that Compas's violent recidivism score has a slightly higher overall concordance score of 65.1%.
+90. The *ProPublica* team found that Compas's violent recidivism score has a slightly higher overall concordance score of 65.1%.
 
 ```Python
 %%R
@@ -975,7 +979,7 @@ print(nrow(vgrp))
 summary(vmodel)
 ```
 
-The *ProPublica* team found that in this case, there isn't a significant coefficient on African American's with High Scores.
+91. The *ProPublica* team found that in this case, there isn't a significant coefficient on African American's with High Scores.
 
 ```Python
 %%R
@@ -1036,17 +1040,17 @@ plotty(black_fit, "Black defendants")
 
 # Directions of the Racial Bias
 
-*ProPublica*'s analysis found that the Compas algorithm does overpredict African-American defendant's future recidivism.
+92. *ProPublica*'s analysis found that the Compas algorithm does overpredict African-American defendant's future recidivism.
 
-The next section of the lab looks at how they explored the direction of the bias.
+93. The next section of the lab looks at how they explored the direction of the bias.
 
-Their analysis found fine differences in overprediction and underprediction by comparing Compas scores across racial lines.
+94. Their analysis found fine differences in overprediction and underprediction by comparing Compas scores across racial lines.
 
-First, we need to load the `truth_tables.py` file with named functions created by the *ProPublica* team.
+95. First, we need to load the `truth_tables.py` file with named functions created by the *ProPublica* team.
 
-Save this file and upload to the same folder as this Jupyter Notebook.
+96. Save this file and upload to the same folder as this Jupyter Notebook.
 
-Then, we can import functions from this file using `from truth_tables import...`.
+97. Then, we can import functions from this file using `from truth_tables import...`.
 
 ```Python
 # import functions from truth tables
@@ -1105,7 +1109,7 @@ print("Average followup time %.2f (sd %.2f)" % (statistics.mean(map(lambda i: i.
 print("Median followup time %i" % (statistics.median(map(lambda i: i.lifetime, pop))))
 ```
 
-Overall, the false positive rate is 32.35%.
+98. Overall, the false positive rate is 32.35%.
 
 ```Python
 # create table with risk scores for Black defendants
@@ -1114,7 +1118,7 @@ is_afam = is_race("African-American")
 table(list(filter(is_afam, recid)), list(filter(is_afam, surv)))
 ```
 
-That number is higher for African Americans at 44.85%.
+99. That number is higher for African Americans at 44.85%.
 
 ```Python
 # create table with risk scores for white defendants
@@ -1123,15 +1127,15 @@ is_white = is_race("Caucasian")
 table(list(filter(is_white, recid)), list(filter(is_white, surv)))
 ```
 
-And lower for whites at 23.45%.
+100. And lower for whites at 23.45%.
 
 ```Python
 44.85 / 23.45
 ```
 
-In the *ProPublica* team's analysis, these results mean under COMPAS black defendants are 91% more likely to get a higher score and not go on to commit more crimes than white defendants after two years.
+101. In the *ProPublica* team's analysis, these results mean under COMPAS black defendants are 91% more likely to get a higher score and not go on to commit more crimes than white defendants after two years.
 
-They also found that COMPAS scores misclassify white reoffenders as low risk at 70.4% more often than black reoffenders.
+102. They also found that COMPAS scores misclassify white reoffenders as low risk at 70.4% more often than black reoffenders.
 
 ```Python
 47.72 / 27.99
@@ -1149,7 +1153,7 @@ hightable(list(filter(is_afam, recid)), list(filter(is_afam, surv)))
 
 # Gender Differences in COMPAS Scores
 
-The *ProPublica* team used gender-specific Kaplan Meier estimates to look at differences between men and women in terms of underlying recidivism rates.
+103. The *ProPublica* team used gender-specific Kaplan Meier estimates to look at differences between men and women in terms of underlying recidivism rates.
 
 ```Python
 %%R
@@ -1184,7 +1188,7 @@ plotty(female_fit, "Female")
 plotty(male_fit, "Male")
 ```
 
-From these plots, the *ProPublica* team determined the Compas score treats a High risk women the same as a Medium risk man.
+104. From these plots, the *ProPublica* team determined the Compas score treats a High risk women the same as a Medium risk man.
 
 # Putting It All Together
 
