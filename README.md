@@ -10,8 +10,9 @@ This tutorial is licensed under a <a href="http://creativecommons.org/licenses/b
 This lab is based on the research and technical documentation for *ProPublica*'s 2016 "Machine Bias" article.
 - Julia Angwin, Jeff Larson, Surya Mtatu, and Lauren Kirchner, “[Machine Bias](https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing)” *ProPublica* (23 May 2016). 
 - Jeff Larson, Surya Mattu, Lauren Kirchner, and Julia Angwin, “[How We Analyzed the COMPAS Recidivism Algorithm](https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm)” *ProPublica* (23 May 2016).
-- [Northpointe document collection gathered by ProPublica team](https://www.documentcloud.org/public/search/%22Project%20ID%22:%20%2227022-compas-documents%22)
-- [Sentencing reports that include risk assessment, gathered by ProPublica team](https://www.documentcloud.org/public/search/%22Project%20ID%22:%20%2224665-sample-psis-that-include-risk-assessments%22)
+- [Link to Google Drive folder that contains](https://drive.google.com/drive/folders/1-by_FJK2wi86flevOi2WKmomE6wL93yB?usp=sharing)
+  * Northpointe document collection gathered by ProPublica team
+  * Sentencing reports that include risk assessment, gathered by ProPublica team
 - [GitHub repository with data files and Jupyter notebook for ProPublica analysis of COMPAS risk scores](https://github.com/propublica/compas-analysis)
 
 The lab is also adapted from a lab developed by [Lauren F. Klein](https://lklein.com/) for the Spring 2020 Emory University course [QTM 490 "Feminist Data Science"](https://github.com/laurenfklein/feminist-data-science).
@@ -58,8 +59,9 @@ Discussion questions:
 # The data
 
 Explore:
-- [Northpointe document collection gathered by ProPublica team](https://www.documentcloud.org/public/search/%22Project%20ID%22:%20%2227022-compas-documents%22)
-- [Sentencing reports that include risk assessment, gathered by ProPublica team](https://www.documentcloud.org/public/search/%22Project%20ID%22:%20%2224665-sample-psis-that-include-risk-assessments%22)
+- [Link to Google Drive folder that contains](https://drive.google.com/drive/folders/1-by_FJK2wi86flevOi2WKmomE6wL93yB?usp=sharing)
+  * Northpointe document collection gathered by ProPublica team
+  * Sentencing reports that include risk assessment, gathered by ProPublica team
 - [GitHub repository with data files and Jupyter notebook for ProPublica analysis of COMPAS risk scores](https://github.com/propublica/compas-analysis)
 
 Discussion questions:
@@ -132,7 +134,7 @@ library(dplyr)
 library(ggplot2)
 ```
 
-1. “dplyr is a grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges:
+"`dplyr` is a grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges:
   * `mutate()` adds new variables that are functions of existing variables
   * `select()` picks variables based on their names.
   * `filter()` picks cases based on their values.
@@ -141,14 +143,14 @@ library(ggplot2)
 
 These all combine naturally with `group_by()` which allows you to perform any operation “by group”. You can learn more about them in [`vignette("dplyr")`](https://dplyr.tidyverse.org/articles/dplyr.html). As well as these single-table verbs, dplyr also provides a variety of two-table verbs, which you can learn about in [`vignette("two-table")`](https://dplyr.tidyverse.org/articles/two-table.html).” [Source: [dplyr.tidyverse.org](https://dplyr.tidyverse.org/)]
 
-2. More dplyr documentation: [cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html)
+More dplyr documentation: [cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html)
 
-3. For more on the conceptual foundations for data transformation in `R`:
+For more on the conceptual foundations for data transformation in `R`:
 - [Chapter 5, "Data Transformation"](https://r4ds.had.co.nz/transform.html) in Hadley Wickham and Garrett Grolemund, [*R for Data Science: Visualize, Model, Transform, Tidy, and Import Data*](https://r4ds.had.co.nz/index.html) (O'Reilly, 2017).
 
-1. “R has several systems for making graphs, but ggplot2 is one of the most elegant and most versatile. ggplot2 implements the grammar of graphics, a coherent system for describing and building graphs. With ggplot2, you can do more faster by learning one system and applying it in many places.” [[Chapter 3 “Data Visualization”](https://r4ds.had.co.nz/data-visualisation.html) in Garrett Grolemund and Hadley Wickham, *R for Data Science*]
+“R has several systems for making graphs, but `ggplot2` is one of the most elegant and most versatile. ggplot2 implements the grammar of graphics, a coherent system for describing and building graphs. With ggplot2, you can do more faster by learning one system and applying it in many places.” [[Chapter 3 “Data Visualization”](https://r4ds.had.co.nz/data-visualisation.html) in Garrett Grolemund and Hadley Wickham, *R for Data Science*]
 
-2. “ggplot2 is a system for declaratively creating graphics, based on The Grammar of Graphics. You provide the data, tell ggplot2 how to map variables to aesthetics, what graphical primitives to use, and it takes care of the details...It’s hard to succinctly describe how ggplot2 works because it embodies a deep philosophy of visualisation. However, in most cases you start with ggplot(), supply a dataset and aesthetic mapping (with aes()). You then add on layers (like geom_point() or geom_histogram()), scales (like scale_colour_brewer()), faceting specifications (like facet_wrap()) and coordinate systems (like coord_flip()).” [[ggplot2.tidyverse.org](https://ggplot2.tidyverse.org/)]
+“`ggplot2` is a system for declaratively creating graphics, based on The Grammar of Graphics. You provide the data, tell ggplot2 how to map variables to aesthetics, what graphical primitives to use, and it takes care of the details...It’s hard to succinctly describe how ggplot2 works because it embodies a deep philosophy of visualisation. However, in most cases you start with ggplot(), supply a dataset and aesthetic mapping (with aes()). You then add on layers (like geom_point() or geom_histogram()), scales (like scale_colour_brewer()), faceting specifications (like facet_wrap()) and coordinate systems (like coord_flip()).” [[ggplot2.tidyverse.org](https://ggplot2.tidyverse.org/)]
 
 We're also going to install and load a few Python packages to have on hand for later in the lab.
 
@@ -971,10 +973,16 @@ Save this file and upload to the same folder as this Jupyter Notebook.
 Then, we can import functions from this file using `from truth_tables import...`.
 
 ```Python
+# import functions from truth tables
 from truth_tables import PeekyReader, Person, table, is_race, count, vtable, hightable, vhightable
+
+# import CSV module
 from csv import DictReader
 
+# create empty dictionary
 people = []
+
+# load parsed data
 with open("cox-parsed.csv") as f:
     reader = PeekyReader(DictReader(f))
     try:
@@ -985,32 +993,46 @@ with open("cox-parsed.csv") as f:
     except StopIteration:
         pass
 
+# filter for specific conditions
 pop = list(filter(lambda i: ((i.recidivist == True and i.lifetime <= 730) or
                               i.lifetime > 730), list(filter(lambda x: x.score_valid, people))))
+
+# filter for specific fonditions
 recid = list(filter(lambda i: i.recidivist == True and i.lifetime <= 730, pop))
+
 rset = set(recid)
+
+# show survival score
 surv = [i for i in pop if i not in rset]
 ```
 
 ```Python
-print("All defendants")
+# print table risk scores
+with print("All defendants")
 table(list(recid), list(surv))
 ```
 
 ```Python
+# print percentage of total population
 print("Total pop: %i" % (2681 + 1282 + 1216 + 2035))
 ```
 
 ```Python
+# import statistics module
 import statistics
+
+# print followup time
 print("Average followup time %.2f (sd %.2f)" % (statistics.mean(map(lambda i: i.lifetime, pop)),
                                                 statistics.stdev(map(lambda i: i.lifetime, pop))))
+
+# print median followup time
 print("Median followup time %i" % (statistics.median(map(lambda i: i.lifetime, pop))))
 ```
 
 Overall, the false positive rate is 32.35%.
 
 ```Python
+# create table with risk scores for Black defendants
 print("Black defendants")
 is_afam = is_race("African-American")
 table(list(filter(is_afam, recid)), list(filter(is_afam, surv)))
@@ -1019,6 +1041,7 @@ table(list(filter(is_afam, recid)), list(filter(is_afam, surv)))
 That number is higher for African Americans at 44.85%.
 
 ```Python
+# create table with risk scores for white defendants
 print("White defendants")
 is_white = is_race("Caucasian")
 table(list(filter(is_white, recid)), list(filter(is_white, surv)))
@@ -1039,10 +1062,12 @@ They also found that COMPAS scores misclassify white reoffenders as low risk at 
 ```
 
 ```Python
+# create table for white defendants' risk scores
 hightable(list(filter(is_white, recid)), list(filter(is_white, surv)))
 ```
 
 ```Python
+# create table for Black defendants' risk scores
 hightable(list(filter(is_afam, recid)), list(filter(is_afam, surv)))
 ```
 
@@ -1051,7 +1076,10 @@ hightable(list(filter(is_afam, recid)), list(filter(is_afam, surv)))
 Compas also offers a score that aims to measure a persons risk of violent recidivism, which has a similar overall accuracy to the Recidivism score.
 
 ```Python
+# create empty dictionary
 vpeople = []
+
+# load data
 with open("cox-violent-parsed.csv") as f:
     reader = PeekyReader(DictReader(f))
     try:
@@ -1062,9 +1090,14 @@ with open("cox-violent-parsed.csv") as f:
     except StopIteration:
         pass
 
+# filter for specific condtiions
 vpop = list(filter(lambda i: ((i.violent_recidivist == True and i.lifetime <= 730) or
                               i.lifetime > 730), list(filter(lambda x: x.vscore_valid, vpeople))))
+
+# filter for specific conditions
 vrecid = list(filter(lambda i: i.violent_recidivist == True and i.lifetime <= 730, vpeople))
+
+# create dataset with filtered results
 vrset = set(vrecid)
 vsurv = [i for i in vpop if i not in vrset]
 ```
@@ -1077,12 +1110,14 @@ vtable(list(vrecid), list(vsurv))
 The *ProPublica* team found these trends were further exacerbated for Black defendants.
 
 ```Python
+# show table with violent risk scores for Black defendants
 print("Black defendants")
 is_afam = is_race("African-American")
 vtable(list(filter(is_afam, vrecid)), list(filter(is_afam, vsurv)))
 ```
 
 ```Python
+# show table with violent risk scores for white defendants
 print("White defendants")
 is_white = is_race("Caucasian")
 vtable(list(filter(is_white, vrecid)), list(filter(is_white, vsurv)))
@@ -1114,23 +1149,26 @@ female_fit <- survfit(f, data=female)
 ```
 
 ```Python
+# show summary for male defendants
 %%R
 summary(male_fit, times=c(730))
 ```
 
 ```Python
+# show summary for female defendants
 %%R
 summary(female_fit, times=c(730))
 ```
 
 ```Python
+# plot female defendants
 %%R 
 plotty(female_fit, "Female")
 ```
 
 ```Python
+# plot male defendants
 %%R 
-
 plotty(male_fit, "Male")
 ```
 
