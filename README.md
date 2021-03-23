@@ -3,14 +3,12 @@
 <a href="http://creativecommons.org/licenses/by-nc/4.0/" rel="license"><img style="border-width: 0;" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" alt="Creative Commons License" /></a>
 This tutorial is licensed under a <a href="http://creativecommons.org/licenses/by-nc/4.0/" rel="license">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
 
-## Lab Goals
-
 ## Acknowledgements
 
 This lab is based on the research and technical documentation for *ProPublica*'s 2016 "Machine Bias" article.
 - Julia Angwin, Jeff Larson, Surya Mtatu, and Lauren Kirchner, “[Machine Bias](https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing)” *ProPublica* (23 May 2016). 
 - Jeff Larson, Surya Mattu, Lauren Kirchner, and Julia Angwin, “[How We Analyzed the COMPAS Recidivism Algorithm](https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm)” *ProPublica* (23 May 2016).
-- [Link to Google Drive folder that contains](https://drive.google.com/drive/folders/1-by_FJK2wi86flevOi2WKmomE6wL93yB?usp=sharing)
+- [Link to Google Drive folder that contains the following items:](https://drive.google.com/drive/folders/1-by_FJK2wi86flevOi2WKmomE6wL93yB?usp=sharing)
   * Northpointe document collection gathered by ProPublica team
   * Sentencing reports that include risk assessment, gathered by ProPublica team
 - [GitHub repository with data files and Jupyter notebook for ProPublica analysis of COMPAS risk scores](https://github.com/propublica/compas-analysis)
@@ -22,6 +20,24 @@ Klein's lab is based on an exercise by Bucknell University Assistant Professor o
 
 # Table of Contents
 
+- [Overview](#overview)
+- [The Story](#the-story)
+- [The Methodology](#the-methodology)
+- [Data Sources](#data-sources)
+- [Environment](#environment)
+- [Data](#data)
+- [Exploratory Data Analysis](#exploratory-data-analysis)
+- [Racial Bias in COMPAS](#racial-bias-in-compas)
+- [Risk of Violent Recidivism](#risk-of-violent-recidivism)
+- [More Exploratory Data Analysis](#more-exploratory-data-analysis)
+- [Predictive Accuracy of COMPAS](#predictive-accuracy-of-compas)
+  * [Proportional hazards model](#proportional-hazards-model)
+  * [Running the model](#running-the-model)
+- [Directions of the Racial Bias](#directions-of-the-racial-bias)
+- [Gender Differences in COMPAS Scores](#gender-differences-in-compas-scores)
+- [Putting it all together](#putting-it-all-together)
+- [Critiques of the ProPublica Project](#critiques-of-the-propublica-project)
+- [Lab Notebook Questions](#lab-notebook-questions)
 
 
 # Overview
@@ -41,7 +57,7 @@ Discussion questions:
 - How do the authors describe the role/functionality/design/etc. of the technology system?
 - Other thoughts/comments/questions/observations.
 
-# The methodology
+# The Methodology
 
 Read: Jeff Larson, Surya Mattu, Lauren Kirchner, and Julia Angwin, “[How We Analyzed the COMPAS Recidivism Algorithm](https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm)” *ProPublica* (23 May 2016).
 
@@ -56,7 +72,7 @@ Discussion questions:
   * Connections we can make with race and surveillance?
 - Other thoughts/comments/questions/observations.
 
-# The data
+# Data Sources
 
 Explore:
 - [Link to Google Drive folder that contains](https://drive.google.com/drive/folders/1-by_FJK2wi86flevOi2WKmomE6wL93yB?usp=sharing)
@@ -421,7 +437,7 @@ fig.tight_layout()
 plt.show()
 ```
 
-# Racial Bias in Compas
+# Racial Bias in COMPAS
 
 These visualizations suggest that *something* is going on. 
 
@@ -546,6 +562,66 @@ df1 <- dplyr::select(compas_two_year_scores_violent, age, c_charge_degree, race,
         filter(c_charge_degree != "O") %>%
         filter(v_score_text != 'N/A')
 nrow(df1)
+```
+
+```Python
+# create empty dictionary
+vpeople = []
+
+# load data
+with open("cox-violent-parsed.csv") as f:
+    reader = PeekyReader(DictReader(f))
+    try:
+        while True:
+            p = Person(reader)
+            if p.valid:
+                vpeople.append(p)
+    except StopIteration:
+        pass
+
+# filter for specific condtiions
+vpop = list(filter(lambda i: ((i.violent_recidivist == True and i.lifetime <= 730) or
+                              i.lifetime > 730), list(filter(lambda x: x.vscore_valid, vpeople))))
+
+# filter for specific conditions
+vrecid = list(filter(lambda i: i.violent_recidivist == True and i.lifetime <= 730, vpeople))
+
+# create dataset with filtered results
+vrset = set(vrecid)
+vsurv = [i for i in vpop if i not in vrset]
+```
+
+```Python
+print("All defendants")
+vtable(list(vrecid), list(vsurv))
+```
+
+The *ProPublica* team found these trends were further exacerbated for Black defendants.
+
+```Python
+# show table with violent risk scores for Black defendants
+print("Black defendants")
+is_afam = is_race("African-American")
+vtable(list(filter(is_afam, vrecid)), list(filter(is_afam, vsurv)))
+```
+
+```Python
+# show table with violent risk scores for white defendants
+print("White defendants")
+is_white = is_race("Caucasian")
+vtable(list(filter(is_white, vrecid)), list(filter(is_white, vsurv)))
+```
+
+The *ProPublica* team found that Black defendants were twice as likely to be false positives for a Higher violent score than white defendants.
+
+```Python
+38.14 / 18.46
+```
+
+They also found white defendants were 63% more likely to get a lower score and commit another crime than Black defendants.
+
+```Python
+62.62 / 38.37
 ```
 
 # More Exploratory Data Analysis
@@ -1071,71 +1147,7 @@ hightable(list(filter(is_white, recid)), list(filter(is_white, surv)))
 hightable(list(filter(is_afam, recid)), list(filter(is_afam, surv)))
 ```
 
-# Risk of Violent Recidivism
-
-Compas also offers a score that aims to measure a persons risk of violent recidivism, which has a similar overall accuracy to the Recidivism score.
-
-```Python
-# create empty dictionary
-vpeople = []
-
-# load data
-with open("cox-violent-parsed.csv") as f:
-    reader = PeekyReader(DictReader(f))
-    try:
-        while True:
-            p = Person(reader)
-            if p.valid:
-                vpeople.append(p)
-    except StopIteration:
-        pass
-
-# filter for specific condtiions
-vpop = list(filter(lambda i: ((i.violent_recidivist == True and i.lifetime <= 730) or
-                              i.lifetime > 730), list(filter(lambda x: x.vscore_valid, vpeople))))
-
-# filter for specific conditions
-vrecid = list(filter(lambda i: i.violent_recidivist == True and i.lifetime <= 730, vpeople))
-
-# create dataset with filtered results
-vrset = set(vrecid)
-vsurv = [i for i in vpop if i not in vrset]
-```
-
-```Python
-print("All defendants")
-vtable(list(vrecid), list(vsurv))
-```
-
-The *ProPublica* team found these trends were further exacerbated for Black defendants.
-
-```Python
-# show table with violent risk scores for Black defendants
-print("Black defendants")
-is_afam = is_race("African-American")
-vtable(list(filter(is_afam, vrecid)), list(filter(is_afam, vsurv)))
-```
-
-```Python
-# show table with violent risk scores for white defendants
-print("White defendants")
-is_white = is_race("Caucasian")
-vtable(list(filter(is_white, vrecid)), list(filter(is_white, vsurv)))
-```
-
-The *ProPublica* team found that Black defendants were twice as likely to be false positives for a Higher violent score than white defendants.
-
-```Python
-38.14 / 18.46
-```
-
-They also found white defendants were 63% more likely to get a lower score and commit another crime than Black defendants.
-
-```Python
-62.62 / 38.37
-```
-
-# Gender differences in Compas scores
+# Gender Differences in COMPAS Scores
 
 The *ProPublica* team used gender-specific Kaplan Meier estimates to look at differences between men and women in terms of underlying recidivism rates.
 
