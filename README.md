@@ -1217,6 +1217,13 @@ If you're interested in exploring these critiques:
   * [preprint research article deposited with arXiv](https://arxiv.org/abs/1906.04711)
   * "[The Data Processing Error in a Prominent Fair Machine Learning Dataset](https://towardsdatascience.com/the-data-processing-error-in-the-most-prominent-fair-machine-learning-dataset-short-version-d27d8d390fea)" *Towards Data Science* (22 August 2019)
 
+Discussion questions:
+- What are some of your initial observations or thoughts on these critiques?
+- How do these critiques respond to or engage with the ProPublica investigation?
+- What are some of your takeaways from exploring these critiques?
+- Particularly, how are you thinking about what it looks like to analyze/investigate/hold accountable “black box” tech systems?
+- Other thoughts/comments/observations
+
 # Lab Notebook Components
 
 The lab notebook consists of a narrative that documents and describes your experience working through this lab.
