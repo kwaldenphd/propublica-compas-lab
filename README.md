@@ -19,15 +19,15 @@ The lab is also adapted from a lab developed by [Lauren F. Klein](https://lklein
 Klein's lab is based on an exercise by Bucknell University Assistant Professor of Computer Science [Darakhshan Mir](http://eg.bucknell.edu/~djm056/).
 
 # Table of Contents
-
 - [Lab Materials](#lab-materials)
 - [Overview](#overview)
 - [The Story](#the-story)
 - [The Methodology](#the-methodology)
 - [Data Sources](#data-sources)
 - [Environment](#environment)
-- [Data](#data)
+- [The First Dataset](#the-first-dataset)
 - [Exploratory Data Analysis](#exploratory-data-analysis)
+- [Visualizing Risk Scores](#visualizing-risk-scores)
 - [Racial Bias in COMPAS](#racial-bias-in-compas)
 - [Risk of Violent Recidivism](#risk-of-violent-recidivism)
 - [More Exploratory Data Analysis](#more-exploratory-data-analysis)
