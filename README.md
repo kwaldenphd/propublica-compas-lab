@@ -20,6 +20,7 @@ Klein's lab is based on an exercise by Bucknell University Assistant Professor o
 
 # Table of Contents
 
+- [Lab Materials](#lab-materials)
 - [Overview](#overview)
 - [The Story](#the-story)
 - [The Methodology](#the-methodology)
@@ -39,6 +40,36 @@ Klein's lab is based on an exercise by Bucknell University Assistant Professor o
 - [Critiques of the ProPublica Project](#critiques-of-the-propublica-project)
 - [Lab Notebook Components](#lab-notebook-components)
 
+# Lab Materials
+
+**Procedure**:
+- [Click here](https://colab.research.google.com/drive/1oXj7TJotQ_vPtWNVVSzExo0--QEeLsw0?usp=sharing) to access the lab procedure as a Jupyter Notebook.
+- [Click here](https://rstudio.cloud/project/3480951) to access the lab procedure as an RMarkdown file via RStudio Cloud
+  * *While the primary lab procedure is written in Python, there is an RMarkdown file that runs through the same workflows from within RStudio*
+  * NOTE: If working in RStudio cloud, you'll need to select the `Save a Permanent Copy` icon in the top-right hand corner to make a copy of the project.
+
+**Lab Notebook Template**
+- [Jupyter Notebook](https://colab.research.google.com/drive/1e3ZeCyHOjauNVEW5U0NPq-_exceAKYmy?usp=sharing)
+- [Google Doc](https://docs.google.com/document/d/1SzcEiEbTTTyiPDygGP4Bw0OWOwEsN0Y5x7RHfJCP-Vw/copy)
+
+**Files**
+
+We'll need the `truth_tables.py` file to run some of the calculations later on in this lab.
+- [Link to download](https://drive.google.com/file/d/1hH8TfJ1ADcXs7WnrVrzTNPzaoGxeN4qH/view?usp=sharing) from Google Drive
+
+We'll also be using four data files.
+- `compas-scores-two-years-violent.csv`
+  * [Google Drive](https://drive.google.com/file/d/1ONM0NwwCLxeIF0Z23jpyHpBFdQxclGcR/view?usp=sharing)
+  * GitHub URL: https://raw.githubusercontent.com/kwaldenphd/propublica-compas-lab/main/data/compas-scores-two-years-violent.csv
+- `compas-scores-two-years.csv`
+  * [Google Drive](https://drive.google.com/file/d/1KgZomaF2Jbob9sW5zrhQs8NcnEd5h2hG/view?usp=sharing)
+  * GitHub URL: https://raw.githubusercontent.com/kwaldenphd/propublica-compas-lab/main/data/compas-scores-two-years.csv
+- `cox-parsed.csv`
+  * [Google Drive](https://drive.google.com/file/d/1uGr-5xnRPdcZKHtgCY6qiSDguPjNLzoL/view?usp=sharing)
+  * GitHub URL: https://raw.githubusercontent.com/kwaldenphd/propublica-compas-lab/main/data/cox-parsed.csv
+- `cox-violent-parsed.csv`
+  * [Google Drive](https://drive.google.com/file/d/1ewAjZObRNCcx55w6Z4WtbphlIRZdy_X3/view?usp=sharing)
+  * GitHub URL: https://raw.githubusercontent.com/kwaldenphd/propublica-compas-lab/main/data/cox-violent-parsed.csv
 
 # Overview
 
@@ -91,10 +122,13 @@ Discussion questions:
 
 # Environment
 
-1. For the first part of the lab, we're actually going to work use RStudio syntax within Python to facilitate easier exploratory data analysis and data wrangling.
+1. Throughout this lab, we'll be using RStudio syntax within Python to facilitate easier exploratory data analysis and data wrangling.
+  * NOTE: If you're working through the lab in RStudio, you'll be using Python syntax from within RStudio.
 
 2. We can do this using the `rpy2` package.
 - [Click here for more information and documentation on the `rpy2` package](https://pypi.org/project/rpy2/)
+
+## If Using Jupyter Notebook/Jupyter Lab (Anaconda)
 
 3. First step is to create a new Anaconda environment.
 
@@ -115,6 +149,8 @@ Discussion questions:
 11. Now we have a Jupyter Notebook environment that can run both Python and RStudio.
 
 12. For more details on this process: ["Using the R programming language in Jupyter Notebook"](https://docs.anaconda.com/anaconda/navigator/tutorials/r-lang/) *Anaconda*
+
+## For Everyone
 
 13. Our next step is to install the `rpy2` package.
 
@@ -137,7 +173,7 @@ warnings.filterwarnings('ignore')
 
 15. Now, anytime we want to run RStudio code, we can start a code cell with the `%%R` magic command.
 
-16. We may run into error messages when running the previous block of code. If needed, run the code below and replace the file path with the anaconda path to R from your local computer.
+16. Folks using Anaconda may run into error messages when running the previous block of code. If needed, run the code below and replace the file path with the anaconda path to R from your local computer.
 
 ```Python
 import os
@@ -145,9 +181,13 @@ os.environ['R_HOME'] = '/Users/<your user>/anaconda3/envs/<env name>/lib/R'
 ```
 
 17. A couple more R packages to load before we start bringing in the data.
+
 ```Python
 %%R
+# load dplyr package for data wrangling
 library(dplyr)
+
+# load ggplot package for visualization
 library(ggplot2)
 ```
 
@@ -187,17 +227,27 @@ import numpy as np
 import matplotlib.pyplot as plt
 ```
 
-# Data
+# The First Dataset
+
+## Loading
 
 25. We're going to work with two datasets in this lab, both developed and published by the *ProPublica* team.
 
 26. `compas-scores-two-years.csv`: *ProPublica* selected fields for severity of charge, number of priors, demographics, age, sex, compas scores, and whether each person was accused of a crime within two years.
 
+**RStudio Syntax**
+
 ```Python
 %%R
 # load data from CSV file
-raw_data <- read.csv("compas-scores-two-years.csv")
+compas_two_year_scores <- read.csv("compas-scores-two-years.csv")
 
+# show data dimensions
+nrow(compas_two_year_scores)
+```
+
+```Python
+%%R
 # load data from URL
 compas_two_year_scores <- read.csv("https://raw.githubusercontent.com/kwaldenphd/propublica-compas-lab/main/data/compas-scores-two-years.csv")
 
@@ -207,23 +257,36 @@ nrow(compas_two_year_scores)
 
 27. We can see we have 52 columns/fields, and 7,214 rows/records in this dataset.
 
+**Python Syntax**
+
 28. We can also express these steps programatically in Python:
+
 ```Python
-data = pd.read_csv('compas-scores-two-years.csv', index_col=0)
+# load data from file
+compas_two_year_scores = pd.read_csv('compas-scores-two-years.csv', index_col=0)
 
-data.shape
-
-data_2 = pd.read_csv('compas-scores-two-years-violent.csv', index_col=0)
-
-data_2.shape
+# show data shape
+compas_two_year_scores.shape
 ```
 
 ```Python
-# look at the first six rows of the dataset
+# load data from url
+compas_two_year_scores = pd.read_csv("https://raw.githubusercontent.com/kwaldenphd/propublica-compas-lab/main/data/compas-scores-two-years.csv", index_col = 0)
+
+# show data shape
+compas_two_year_scores.shape
+```
+
+```Python
+# look at the first five rows of the dataset
 pd.options.display.max_columns = None # have to do this otherwise it limits the number of cols shown
 
-data.head() 
+# show first five rows
+compas_two_year_scores.head()
 ```
+
+## Filtering
+
 29. Not all of the rows are useable for the first round of analysis.
 
 30. The *ProPublica* team determined a number of criteria for removing missing or unusable data. 
@@ -234,9 +297,13 @@ data.head()
 - In a similar vein, ordinary traffic offenses -- those with a `c_charge_degree` of 'O' -- will not result in Jail time are removed (only two of them).
 - We filtered the underlying data from Broward county to include only those rows representing people who had either recidivated in two years, or had at least two years outside of a correctional facility.
 
-32. To filter the data using these criteria:
+32. To filter the data using these criteria...
+
+**RStudio Syntax**
+
 ```Python
 %%R
+# create new dataframe using filtering criteria
 df <- dplyr::select(compas_two_year_scores, age, c_charge_degree, race, age_cat, score_text, sex, priors_count, 
                     days_b_screening_arrest, decile_score, is_recid, two_year_recid, c_jail_in, c_jail_out) %>% 
         filter(days_b_screening_arrest <= 30) %>%
@@ -244,16 +311,24 @@ df <- dplyr::select(compas_two_year_scores, age, c_charge_degree, race, age_cat,
         filter(is_recid != -1) %>%
         filter(c_charge_degree != "O") %>%
         filter(score_text != 'N/A')
+
+# show updated dataframe
 nrow(df)
 ```
+
+**Python Syntax**
 
 33. To run that filtering operation in Python, first we'll filter out those which do not have a COMPAS-scored case, as indicated by the recidivist flag `is_recid` set at -1.
 
 ```Python
-filterData = data[(data['is_recid'] != -1)]
+# filter data
+filterData = compas_two_year_scores[(compas_two_year_scores['is_recid'] != -1)]
 
+# show updated data shape
 filterData.shape
 ```
+
+## More Filtering
 
 34. Within the cases with a COMPAS score, we also need to check to see if we have the right offense. 
 
@@ -261,9 +336,13 @@ filterData.shape
 
 36. So we will filter out rows where **days_b_screening_arrest** is over 30 or under -30:
 
-```Python
-filterData = data[(data['days_b_screening_arrest'] <= 30) & (data['days_b_screening_arrest'] >= -30)]
+**Python Syntax**
 
+```Python
+# filter data
+filterData = compas_two_year_scores[(compas_two_year_scores['days_b_screening_arrest'] <= 30) & (compas_two_year_scores['days_b_screening_arrest'] >= -30)]
+
+# show updated data
 filterData.shape
 ```
 
@@ -273,37 +352,55 @@ filterData.shape
 
 38. Higher COMPAS scores are slightly correlated with a longer length of stay. 
 
+**RStudio Syntax**
+
 ```Python
 %%R
+# select length of stay
 df$length_of_stay <- as.numeric(as.Date(df$c_jail_out) - as.Date(df$c_jail_in))
+
+# show correlation
 cor(df$length_of_stay, df$decile_score)
 ```
 
 39. After filtering we have the following demographic breakdown:
 
+## By Age
+
+**RStudio Syntax**
+
 ```Python
-# summary of age range represented in the dataset
 %%R
+# summary of age range represented in the dataset
 summary(df$age_cat)
 ```
+
+**Python Syntax**
 
 ```Python
 # Python syntax for age summary
 filterData.age_cat.value_counts()
 ```
 
+## By Race
+
+**Rstudio Syntax**
+
 ```Python
-# summary of race information represented in the dataset
 %%R
+# summary of race/ethnicity information represented in the dataset
 summary(df$race)
 ```
 
+**Python Syntax**
+
 ```Python
-# Python syntax for race/ethnicity summary
+# race/ethnicity summary
 filterData.race.value_counts()
 ```
 
 ```Python
+# show percentages by race/ethnicity
 print("Black defendants: %.2f%%" %            (3175 / 6172 * 100))
 print("White defendants: %.2f%%" %            (2103 / 6172 * 100))
 print("Hispanic defendants: %.2f%%" %         (509  / 6172 * 100))
@@ -311,64 +408,77 @@ print("Asian defendants: %.2f%%" %            (31   / 6172 * 100))
 print("Native American defendants: %.2f%%" %  (11   / 6172 * 100))
 ```
 
+## By Risk Scores
+
+**RStudio Syntax**
 ```Python
-# summary of risk scores
 %%R
+# summary of risk scores
 summary(df$score_text)
 ```
 
 ```Python
-# Python syntax for risk score summary
+%%R
+# cross tab summary of data by race/ethnicity and gender
+xtabs(~ sex + race, data=df)
+```
+
+**Python Syntax**
+```Python
+# risk score summary
 filterData.score_text.value_counts()
 ```
 
 ```Python
-# cross tab summary of data by race/ethnicity and gender
-%%R
-xtabs(~ sex + race, data=df)
-```
-
-```Python
-# Python syntax for the cross tab summary, using the crosstab function
-# recidivsm rates by race
+# cross tabs for recidivsm rates by race
 pd.crosstab(filterData.sex, filterData.race)
 ```
 
+## By Gender
+
+**RStudio Syntax**
 ```Python
-# summary of data by gender
 %%R
+# summary of data by gender
 summary(df$sex)
 ```
 
+**Python Syntax**
 ```Python
-# python syntax for the gender breakdown
+# gender breakdown
 filterData.sex.value_counts()
 ```
 
 ```Python
+# percentages by gender
 print("Men: %.2f%%" %   (4997 / 6172 * 100))
 print("Women: %.2f%%" % (1175 / 6172 * 100))
 ```
 
+## By Recidivism Rate
+
+**RStudio Syntax**
 ```Python
-# number of rows where two_year_recid = 1
 %%R
+# number of rows where two_year_recid = 1
 nrow(filter(df, two_year_recid == 1))
 ```
 
 ```Python
-# percentage of rows where two_year_recid = 2
 %%R
+# percentage of rows where two_year_recid = 2
 nrow(filter(df, two_year_recid == 1)) / nrow(df) * 100
 ```
+
+# Visualizing Risk Scores
 
 40. Judges are often presented with two sets of scores from the Compas system -- one that classifies people into High, Medium and Low risk, and a corresponding decile score. 
 
 41. *ProPublica*'s analysis found a clear downward trend in the decile scores as those scores increase for white defendants.
 
+**Calculating decile risk scores by race, using RStudio syntax**
 ```Python
 %%R
-
 # create bar chart with decile risk scores for Black defendants
 pblack <- ggplot(data=filter(df, race =="African-American"), aes(ordered(decile_score))) + 
           geom_bar() + xlab("Decile Score") +
@@ -387,28 +497,36 @@ show(pwhite)
 ```
 
 ```Python
-# cross tab data by race and decile score
 %%R
+# cross tab data by race and decile score
 xtabs(~ decile_score + race, data=df)
 ```
 
+**Calculating decile risk scores by race, using Python syntax**
+
 ```Python
-# python syntax for the cross tab
+# cross tabs by race/ethnicity
 scores_by_race = pd.crosstab(filterData.race, filterData.decile_score)
 
+# show scores
 scores_by_race
 ```
 
 ```Python
-# python syntax to generate another visualization with the decile scores disaggregated by race
+# another visualization with the decile scores disaggregated by race/ethnicity
+
+# create labels
 labels = list(scores_by_race.columns)
 
+# list with scores by race
 aa_scores = list(scores_by_race.loc["African-American"])
 c_scores = list(scores_by_race.loc["Caucasian"])
 
+# arrange labels and set width
 x = np.arange(len(labels))
 width = 0.35
 
+# generate plot
 fig, ax = plt.subplots()
 rects1 = ax.bar(x - width/2, aa_scores, width, label='African-American')
 rects2 = ax.bar(x + width/2, c_scores, width, label='Caucasian')
@@ -421,6 +539,7 @@ ax.set_xticklabels(labels)
 ax.legend()
 
 
+# function for placing labels
 def autolabel(rects):
     """Attach a text label above each bar in *rects*, displaying its height."""
     for rect in rects:
@@ -431,11 +550,14 @@ def autolabel(rects):
                     textcoords="offset points",
                     ha='center', va='bottom')
 
+# run label placing functions
 autolabel(rects1)
 autolabel(rects2)
 
+# update figure layout
 fig.tight_layout()
 
+# show figure
 plt.show()
 ```
 
@@ -453,8 +575,11 @@ plt.show()
 
 47. The first step would be to convert the c_charge_degree, age_cat, race, sex (which are all categorical data) into factors. 
 
+**RStudio Syntax**
+
 ```Python
 %%R
+# filter dataframe
 df <- mutate(df, crime_factor = factor(c_charge_degree)) %>%
       mutate(age_factor = as.factor(age_cat)) %>%
       within(age_factor <- relevel(age_factor, ref = 1)) %>%
@@ -465,10 +590,14 @@ df <- mutate(df, crime_factor = factor(c_charge_degree)) %>%
       mutate(score_factor = factor(score_text != "Low", labels = c("LowScore","HighScore")))
 model <- glm(score_factor ~ gender_factor + age_factor + race_factor +
                             priors_count + crime_factor + two_year_recid, family="binomial", data=df)
+
+# show updated dataframe
 summary(model)
 ```
 
 48. But we can use the Patsy API, part of the Python `statsmodels` library, to embed these transformations within the forumla.
+
+**Python Syntax**
 
 ```Python
 # install statsmodels library
@@ -485,9 +614,9 @@ import pandas as pd
 
 ```Python
 # create a score variable where "Low" => 0, "Medium"/"High" => 1
-
 filterData['score'] = (filterData['score_text'] != "Low") * 1
 ```
+
 ```Python
 # use the Patsy API for formula generation
 formula = "score ~ C(sex, Treatment('Male')) + age_cat + " + \
@@ -499,6 +628,7 @@ formula = "score ~ C(sex, Treatment('Male')) + age_cat + " + \
 # run the model
 model = smf.glm(formula=formula, data=filterData, family=sm.families.Binomial()).fit()
 
+# show model summary
 model.summary()
 ```
 
@@ -506,6 +636,7 @@ model.summary()
 
 ```Python
 %%R
+# control calculations by race
 control <- exp(-1.52554) / (1 + exp(-1.52554))
 exp(0.47721) / (1 - control + (control * exp(0.47721)))
 ```
@@ -514,6 +645,7 @@ exp(0.47721) / (1 - control + (control * exp(0.47721)))
 
 ```Python
 %%R
+# control calculations by gender
 exp(0.22127) / (1 - control + (control * exp(0.22127)))
 ```
 
@@ -521,6 +653,7 @@ exp(0.22127) / (1 - control + (control * exp(0.22127)))
 
 ```Python
 %%R
+# control calculations by age
 exp(1.30839) / (1 - control + (control * exp(1.30839)))
 ```
 
@@ -532,16 +665,50 @@ exp(1.30839) / (1 - control + (control * exp(1.30839)))
 
 54. They used the second dataset `compas-scores-two-years-violent` to analyze the violent recidivism score.
 
+**RStudio Syntax**
+
 ```Python
 %%R
 # load data from CSV file
-raw_data <- read.csv("compas-scores-two-years-violent.csv")
+compas_two_year_scores_violent <- read.csv("compas-scores-two-years-violent.csv")
 
+# show data dimensions
+nrow(compas_two_year_scores_violent)
+```
+
+```Python
+%%R
 # load data from URL
 compas_two_year_scores_violent <- read.csv("https://raw.githubusercontent.com/kwaldenphd/propublica-compas-lab/main/data/compas-scores-two-years-violent.csv")
 
 # show data dimensions
 nrow(compas_two_year_scores_violent)
+```
+
+**Python Syntax**
+
+```Python
+# load data from file
+compas_two_year_scores_violent = pd.read_csv('compas-scores-two-years-violent.csv', index_col=0)
+
+# show data shape
+compas_two_year_scores_violent.shape
+```
+
+```Python
+# load data from url
+compas_two_year_scores_violent = pd.read_csv("https://raw.githubusercontent.com/kwaldenphd/propublica-compas-lab/main/data/compas-scores-two-years-violent.csv", index_col = 0)
+
+# show data shape
+compas_two_year_scores_violent.shape
+```
+
+```Python
+# look at the first five rows of the dataset
+pd.options.display.max_columns = None # have to do this otherwise it limits the number of cols shown
+
+# show first five rows
+compas_two_year_scores_violent.head()
 ```
 
 55. Again, we can see that we have 52 columns/fields, and 7,214 rows/records in this dataset.
@@ -555,8 +722,12 @@ nrow(compas_two_year_scores_violent)
 - We filtered the underlying data from Broward county to include only those rows representing people who had either recidivated in two years, or had at least two years outside of a correctional facility.
 
 58. To filter the data using these criteria:
+
+**RStudio Syntax**
+
 ```Python
 %%R
+# filter dataframe
 df1 <- dplyr::select(compas_two_year_scores_violent, age, c_charge_degree, race, age_cat, v_score_text, sex, priors_count, 
                     days_b_screening_arrest, v_decile_score, is_recid, two_year_recid) %>% 
         filter(days_b_screening_arrest <= 30) %>%
@@ -564,10 +735,32 @@ df1 <- dplyr::select(compas_two_year_scores_violent, age, c_charge_degree, race,
         filter(is_recid != -1) %>%
         filter(c_charge_degree != "O") %>%
         filter(v_score_text != 'N/A')
+
+# show updated dataframe
 nrow(df1)
 ```
 
+**Python Syntax**
+
+To be able to run a similar program in Python, we need to load the `truth_tables.py` file with named functions created by the *ProPublica* team.
+- [Click here](https://drive.google.com/file/d/1hH8TfJ1ADcXs7WnrVrzTNPzaoGxeN4qH/view?usp=sharing) to download from Google Drive.
+
+If working with Jupyter Notebooks on your local computer, you'll need to move the `truth_tables.py` file into the same directory (folder) as the Jupyter Notebook.
+- Alternatively, you can provide the full file path.
+
+If working in Google CoLab, you'll either need to upload the file to your session or mount Google Drive to access the file.
+- [Uploading files](https://youtu.be/6HFlwqK3oeo?t=177)
+- [Mounting Google Drive](https://www.marktechpost.com/2019/06/07/how-to-connect-google-colab-with-google-drive/)
+
+Then, we can import functions from this file using `from truth_tables import...`.
+
 ```Python
+# import functions from truth tables
+from truth_tables import PeekyReader, Person, table, is_race, count, vtable, hightable, vhightable
+
+# import CSV module
+from csv import DictReader
+
 # create empty dictionary
 vpeople = []
 
@@ -595,6 +788,7 @@ vsurv = [i for i in vpop if i not in vrset]
 ```
 
 ```Python
+# show updated data
 print("All defendants")
 vtable(list(vrecid), list(vsurv))
 ```
@@ -630,26 +824,26 @@ vtable(list(filter(is_white, vrecid)), list(filter(is_white, vsurv)))
 # More Exploratory Data Analysis
 
 ```Python
-# age distribution
 %%R
+# age distribution
 summary(df1$age_cat)
 ```
 
 ```Python
-# race/ethnicity distribution
 %%R
+# race/ethnicity distribution
 summary(df1$race)
 ```
 
 ```Python
-# number of rows where two_year_recid = 1
 %%R
+# number of rows where two_year_recid = 1
 nrow(filter(df1, two_year_recid == 1))
 ```
 
 ```Python
-# percentage of rows where two_year_recid = 1
 %%R
+# percentage of rows where two_year_recid = 1
 nrow(filter(df1, two_year_recid == 1)) / nrow(df) * 100
 ```
 
@@ -657,7 +851,6 @@ nrow(filter(df1, two_year_recid == 1)) / nrow(df) * 100
 
 ```Python
 %%R
-
 # create bar chart with decile violent risk scores for Black defendants
 pblack_v <- ggplot(data=filter(df1, race =="African-American"), aes(ordered(v_decile_score))) + 
           geom_bar() + xlab("Violent Decile Score") +
@@ -679,6 +872,7 @@ show(pwhite_v)
 
 ```Python
 %%R
+# filter data
 df1 <- mutate(df1, crime_factor = factor(c_charge_degree)) %>%
       mutate(age_factor = as.factor(age_cat)) %>%
       within(age_factor <- relevel(age_factor, ref = 1)) %>%
@@ -695,6 +889,8 @@ df1 <- mutate(df1, crime_factor = factor(c_charge_degree)) %>%
       mutate(score_factor = factor(v_score_text != "Low", labels = c("LowScore","HighScore")))
 model <- glm(score_factor ~ gender_factor + age_factor + race_factor +
                             priors_count + crime_factor + two_year_recid, family="binomial", data=df)
+
+# show model summary
 summary(model)
 ```
 
@@ -702,6 +898,7 @@ summary(model)
 
 ```Python
 %%R
+# control calculations by race
 control <- exp(-2.24274) / (1 + exp(-2.24274))
 exp(0.65893) / (1 - control + (control * exp(0.65893)))
 ```
@@ -710,6 +907,7 @@ exp(0.65893) / (1 - control + (control * exp(0.65893)))
 
 ```Python
 %%R
+# control calculations by age
 exp(3.14591) / (1 - control + (control * exp(3.14591)))
 ```
 
@@ -725,7 +923,7 @@ exp(3.14591) / (1 - control + (control * exp(3.14591)))
 
 70. They determined that since there are 13,334 total rows in the data, such a small amount of errors would not affect the results.
 
-## Proportional hazards model
+## Proportional Hazards Model
 
 71. What is a Cox Proportional Hazards model?
 
@@ -740,8 +938,7 @@ exp(3.14591) / (1 - control + (control * exp(3.14591)))
 - [For more information on the underlying math in the Cox model](https://en.wikipedia.org/wiki/Proportional_hazards_model#The_Cox_model)
 - [Examples of the Cox model used to analyze health outcomes](https://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/BS704_Survival/BS704_Survival6.html)
 
-
-## Running the model
+## Running the Model
 
 76. To run this model, we need a couple of additional R packages.
 
@@ -753,22 +950,64 @@ exp(3.14591) / (1 - control + (control * exp(3.14591)))
 
 ```Python
 %%R
+# install packages
+install.packages('ggfortify')
+install.packages('survival')
+```
+
+```Python
+%%R
+# load packages
 library(survival)
 library(ggfortify)
 ```
 
 79. We also need to load data structured for the model.
 
+**RStudio Syntax**
+
 ```Python
 %%R
 # load data from CSV file
 cox_parsed <- read.csv("cox-parsed.csv")
 
+# show data dimensions
+nrow(cox_parsed)
+```
+
+```Python
+%%R
 # load data from URL
 cox_parsed <- read.csv("https://raw.githubusercontent.com/kwaldenphd/propublica-compas-lab/main/data/cox-parsed.csv")
 
 # show data dimensions
 nrow(cox_parsed)
+```
+
+**Python Syntax**
+
+```Python
+# load data from file
+cox_parsed = pd.read_csv('cox-parsed.csv', index_col=0)
+
+# show data shape
+cox_parsed.shape
+```
+
+```Python
+# load data from url
+cox_parsed = pd.read_csv("https://raw.githubusercontent.com/kwaldenphd/propublica-compas-lab/main/data/cox-parsed.csv", index_col = 0)
+
+# show data shape
+cox_parsed.shape
+```
+
+```Python
+# look at the first five rows of the dataset
+pd.options.display.max_columns = None # have to do this otherwise it limits the number of cols shown
+
+# show first five rows
+cox_parsed.head()
 ```
 
 80. We can see this data has 13,419 observations.
@@ -777,8 +1016,8 @@ nrow(cox_parsed)
 
 ```Python
 %%R
-
-cox_parsed <- filter(filter(read.csv("cox-parsed.csv"), score_text != "N/A"), end > start) %>%
+# filter data
+cox_parsed <- filter(filter(read.csv("https://raw.githubusercontent.com/kwaldenphd/propublica-compas-lab/main/data/cox-parsed.csv"), score_text != "N/A"), end > start) %>%
         mutate(race_factor = factor(race,
                                   labels = c("African-American", 
                                              "Asian",
@@ -790,27 +1029,29 @@ cox_parsed <- filter(filter(read.csv("cox-parsed.csv"), score_text != "N/A"), en
         mutate(score_factor = factor(score_text)) %>%
         within(score_factor <- relevel(score_factor, ref=2))
 
+# remove duplicate rows
 grp <- cox_parsed[!duplicated(cox_parsed$id),]
+
+# show updated data
 nrow(grp)
 ```
 
 82. The results of that filtering is 10,314 observations.
 
 ```Python
-# score ranges
 %%R
+# score ranges
 summary(grp$score_factor)
 ```
 
 ```Python
-# data summary by race/ethnicity
 %%R
+# data summary by race/ethnicity
 summary(grp$race_factor)
 ```
 
 ```Python
 %%R
-
 # score factor
 f <- Surv(start, end, event, type="counting") ~ score_factor
 
@@ -825,7 +1066,6 @@ summary(model)
 
 ```Python
 %%R
-
 # decile scores
 decile_f <- Surv(start, end, event, type="counting") ~ decile_score
 
@@ -842,7 +1082,6 @@ summary(dmodel)
 
 ```Python
 %%R
-
 # score factor
 f2 <- Surv(start, end, event, type="counting") ~ race_factor + score_factor + race_factor * score_factor
 
@@ -858,7 +1097,10 @@ print(summary(model))
 87. They also found high risk white defendants are 3.61 more likely than low risk white defendants, while High risk black defendants are 2.99 more likely than low.
 
 ```Python
+# import statement
 import math
+
+# show interaction term by race
 print("Black High Hazard: %.2f" % (math.exp(-0.18976 + 1.28350)))
 print("White High Hazard: %.2f" % (math.exp(1.28350)))
 print("Black Medium Hazard: %.2f" % (math.exp(0.84286-0.17261)))
@@ -867,7 +1109,6 @@ print("White Medium Hazard: %.2f" % (math.exp(0.84286)))
 
 ```Python
 %%R -w 900 -h 563 -u px
-
 # create fitted curve based on survival model
 fit <- survfit(f, data=cox_parsed)
 
@@ -884,7 +1125,6 @@ plotty(fit, "Overall")
 
 ```Python
 %%R
-
 # filter data for white defendants
 white <- filter(cox_parsed, race == "Caucasian")
 white_fit <- survfit(f, data=white)
@@ -896,35 +1136,30 @@ black_fit <- survfit(f, data=black)
 
 ```Python
 %%R
-
 # plot white defendants
 plotty(white_fit, "White defendants")
 ```
 
 ```Python
 %%R
-
 # plot Black defendants
 plotty(black_fit, "Black defendants")
 ```
 
 ```Python
 %%R
-
 # calculate model summary
 summary(fit, times=c(730))
 ```
 
 ```Python
 %%R
-
 # calculate model summary for Black defendants
 summary(black_fit, times=c(730))
 ```
 
 ```Python
 %%R
-
 # calculate model summary for white defendnats
 summary(white_fit, times=c(730))
 ```
@@ -933,14 +1168,12 @@ summary(white_fit, times=c(730))
 
 ```Python
 %%R
-
 # calculate concordance values for white defendnats
 summary(coxph(f, data=white))
 ```
 
 ```Python
 %%R
-
 # calculate concordance values for Black defendants
 summary(coxph(f, data=black))
 ```
@@ -983,7 +1216,6 @@ summary(vmodel)
 
 ```Python
 %%R
-
 # survival model
 vf2 <- Surv(start, end, event, type="counting") ~ race_factor + race_factor * score_factor
 
@@ -996,21 +1228,18 @@ summary(vmodel)
 
 ```Python
 %%R
-
 # concordance values summary for Black defendants
 summary(coxph(vf, data=filter(violent_data, race == "African-American")))
 ```
 
 ```Python
 %%R
-
 # concordance values summary for white defendants
 summary(coxph(vf, data=filter(violent_data, race == "Caucasian")))
 ```
 
 ```Python
 %%R
-
 # filter data for white defendnats
 white <- filter(violent_data, race == "Caucasian")
 
@@ -1026,14 +1255,12 @@ black_fit <- survfit(vf, data=black)
 
 ```Python
 %%R
-
 # plot white defendants
 plotty(white_fit, "White defendants")
 ```
 
 ```Python
 %%R
-
 # plot Black defendants
 plotty(black_fit, "Black defendants")
 ```
@@ -1047,10 +1274,18 @@ plotty(black_fit, "Black defendants")
 94. Their analysis found fine differences in overprediction and underprediction by comparing Compas scores across racial lines.
 
 95. First, we need to load the `truth_tables.py` file with named functions created by the *ProPublica* team.
+- [Click here](https://drive.google.com/file/d/1hH8TfJ1ADcXs7WnrVrzTNPzaoGxeN4qH/view?usp=sharing) to download from Google Drive.
 
-96. Save this file and upload to the same folder as this Jupyter Notebook.
+If working with Jupyter Notebooks on your local computer, you'll need to move the `truth_tables.py` file into the same directory (folder) as the Jupyter Notebook.
+- Alternatively, you can provide the full file path.
+
+If working in Google CoLab, you'll either need to upload the file to your session or mount Google Drive to access the file.
+- [Uploading files](https://youtu.be/6HFlwqK3oeo?t=177)
+- [Mounting Google Drive](https://www.marktechpost.com/2019/06/07/how-to-connect-google-colab-with-google-drive/)
 
 97. Then, we can import functions from this file using `from truth_tables import...`.
+
+**Python Syntax**
 
 ```Python
 # import functions from truth tables
@@ -1063,7 +1298,7 @@ from csv import DictReader
 people = []
 
 # load parsed data
-with open("cox-parsed.csv") as f:
+with open("https://raw.githubusercontent.com/kwaldenphd/propublica-compas-lab/main/data/cox-parsed.csv") as f:
     reader = PeekyReader(DictReader(f))
     try:
         while True:
@@ -1157,7 +1392,7 @@ hightable(list(filter(is_afam, recid)), list(filter(is_afam, surv)))
 
 ```Python
 %%R
-
+# filter by gender
 female <- filter(cox_parsed, sex == "Female")
 male   <- filter(cox_parsed, sex == "Male")
 male_fit <- survfit(f, data=male)
@@ -1165,26 +1400,26 @@ female_fit <- survfit(f, data=female)
 ```
 
 ```Python
-# show summary for male defendants
 %%R
+# show summary for male defendants
 summary(male_fit, times=c(730))
 ```
 
 ```Python
-# show summary for female defendants
 %%R
+# show summary for female defendants
 summary(female_fit, times=c(730))
 ```
 
 ```Python
-# plot female defendants
 %%R 
+# plot female defendants
 plotty(female_fit, "Female")
 ```
 
 ```Python
-# plot male defendants
 %%R 
+# plot male defendants
 plotty(male_fit, "Male")
 ```
 
@@ -1226,9 +1461,13 @@ Discussion questions:
 
 # Lab Notebook Components
 
+Lab Notebook Template:
+- [Jupyter Notebook](https://colab.research.google.com/drive/1e3ZeCyHOjauNVEW5U0NPq-_exceAKYmy?usp=sharing)
+- [Google Doc](https://docs.google.com/document/d/1SzcEiEbTTTyiPDygGP4Bw0OWOwEsN0Y5x7RHfJCP-Vw/copy)
+
 The lab notebook consists of a narrative that documents and describes your experience working through this lab.
 
-You can respond to/engage with the discussion questions included in the lab procedure.
+You can respond to/engage with the discussion questions embedded throughout the lab procedure.
 
 Other questions for the lab notebook: 
 - What challenges did you face, and how did you solve them?
@@ -1237,3 +1476,4 @@ Other questions for the lab notebook:
 - Other comments/questions/observations
 
 I encourage folks to include code + screenshots as part of that narrative.
+- You are welcome (but not required) to include Python code as part of that narrative.
