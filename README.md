@@ -71,6 +71,8 @@ We'll also be using four data files.
   * [Google Drive](https://drive.google.com/file/d/1ewAjZObRNCcx55w6Z4WtbphlIRZdy_X3/view?usp=sharing)
   * GitHub URL: https://raw.githubusercontent.com/kwaldenphd/propublica-compas-lab/main/data/cox-violent-parsed.csv
 
+[Link to download all files for this lab from Google Drive as a .zip](https://drive.google.com/file/d/10ntNzhF7c7b-4G1ifeZkM5ThjFeKH-Ja/view?usp=sharing).
+
 # Overview
 
 In 2016, a *ProPublica* investigative journalism team including published "Machine Bias," an incisive look at the COMPAS risk prediction system used in the criminal justice system. In addition to the main story that emphasizes the human toll of a racially-biased system, the *ProPublica* team published a detailed methodology, data, and technical documentation for the story.
