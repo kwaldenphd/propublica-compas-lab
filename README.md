@@ -1131,7 +1131,7 @@ summary(black_fit, times=c(730))
 
 ```Python
 %%R
-# calculate model summary for white defendnats
+# calculate model summary for white defendants
 summary(white_fit, times=c(730))
 ```
 
