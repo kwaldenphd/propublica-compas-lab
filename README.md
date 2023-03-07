@@ -552,6 +552,8 @@ These factor conversions were necessary because of RStudio syntax. The first ste
 
 **RStudio Syntax**
 
+*NOTE from Prof. Walden- I'm getting a `RInterpreter Error` for the code block below related to `LAPACK routines`. If you're getting, jump to the `Python Statsmodels syntax` code cells.*
+
 ```Python
 %%R
 # filter dataframe
@@ -848,6 +850,10 @@ show(pwhite_v)
 
 Again, the *ProPublica* team explored the question of racial bias by changing some variables into factors, and running a logistic regression, comparing low scores to high scores.
 
+**RStudio Syntax**
+
+*NOTE from Prof. Walden- I'm getting a `RInterpreter Error` for the code block below related to `LAPACK routines`. If you're getting, skip this code cell.*
+
 ```Python
 %%R
 # filter data
@@ -872,7 +878,7 @@ model <- glm(score_factor ~ gender_factor + age_factor + race_factor +
 summary(model)
 ```
 
-The violent score overpredicts recidivism for black defendants by 77.3% compared to white defendants.
+The violent score overpredicts recidivism for Black defendants by 77.3% compared to white defendants.
 
 ```Python
 %%R
@@ -916,13 +922,13 @@ To run this model, we need a couple of additional R packages.
 
 - The `survival` package contains the definition for the Cox model (as well as other statistical models). [For more on `survival`](https://cran.r-project.org/web/packages/survival/index.html)
 
-**RStudio Syntax**
+**Terminal Syntax to Install RStudio Packages**
 
-```Python
-%%R
-# install packages
-install.packages('ggfortify')
-install.packages('survival')
+```
+! R -e "install.packages('ggfortify')"
+! R -e "install.packages('survival')"
+! R -e "library(ggfortify)"
+! R -e "library(survival)"
 ```
 
 ```Python
@@ -1265,7 +1271,7 @@ We'll also need to have the `cox-violent-parsed.csv` file in your local working 
 ```Python
 # code to download the cox-parsed.csv within your Python IDE
 import json, requests, urllib, urllib.request
-urllib.request.urlretrieve("https://raw.githubusercontent.com/kwaldenphd/propublica-compas-lab/main/data/cox-parsed.csv", "cox-violent-parsed.csv")
+urllib.request.urlretrieve("https://raw.githubusercontent.com/kwaldenphd/propublica-compas-lab/main/data/cox-parsed.csv", "cox-parsed.csv")
 ```
 
 Then, we can import functions from this file using `from truth_tables import...`.
@@ -1308,7 +1314,7 @@ surv = [i for i in pop if i not in rset]
 
 ```Python
 # print table risk scores
-with print("All defendants")
+print("All defendants")
 table(list(recid), list(surv))
 ```
 
@@ -1338,7 +1344,7 @@ is_afam = is_race("African-American")
 table(list(filter(is_afam, recid)), list(filter(is_afam, surv)))
 ```
 
-That number is higher for African Americans at 44.85%.
+That number is higher for Black defendants at 44.85%.
 
 ```Python
 # create table with risk scores for white defendants
@@ -1347,15 +1353,15 @@ is_white = is_race("Caucasian")
 table(list(filter(is_white, recid)), list(filter(is_white, surv)))
 ```
 
-And lower for whites at 23.45%.
+And lower for white defendants at 23.45%.
 
 ```Python
 44.85 / 23.45
 ```
 
-In the *ProPublica* team's analysis, these results mean under COMPAS black defendants are 91% more likely to get a higher score and not go on to commit more crimes than white defendants after two years.
+In the *ProPublica* team's analysis, these results mean under COMPAS Black defendants are 91% more likely to get a higher score and not go on to commit more crimes than white defendants after two years.
 
-They also found that COMPAS scores misclassify white reoffenders as low risk at 70.4% more often than black reoffenders.
+They also found that COMPAS scores misclassify white reoffenders as low risk at 70.4% more often than Black reoffenders.
 
 **Python Syntax**
 
