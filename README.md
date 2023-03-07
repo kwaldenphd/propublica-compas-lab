@@ -452,7 +452,7 @@ nrow(filter(df, two_year_recid == 1))
 nrow(filter(df, two_year_recid == 1)) / nrow(df) * 100
 ```
 
-## Visualizing Risk Scores
+### Visualizing Risk Scores
 
 Judges are often presented with two sets of scores from the Compas system -- one that classifies people into High, Medium and Low risk, and a corresponding decile score. *ProPublica*'s analysis found a clear downward trend in the decile scores as those scores increase for white defendants.
 
