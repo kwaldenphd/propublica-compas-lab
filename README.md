@@ -922,7 +922,7 @@ To run this model, we need a couple of additional R packages.
 
 - The `survival` package contains the definition for the Cox model (as well as other statistical models). [For more on `survival`](https://cran.r-project.org/web/packages/survival/index.html)
 
-**Terminal Syntax to Install RStudio Packages**
+**Terminal Syntax to Install RStudio Packages in Jupyter Notebook**
 
 ```
 ! R -e "install.packages('ggfortify')"
@@ -930,6 +930,8 @@ To run this model, we need a couple of additional R packages.
 ! R -e "library(ggfortify)"
 ! R -e "library(survival)"
 ```
+
+**RStudio Syntax**
 
 ```Python
 %%R
