@@ -162,7 +162,7 @@ Our next step is to install the `rpy2` package.
 ```Python
 # Install a pip package in the current Jupyter kernel
 import sys
-!{sys.executable} -m pip install rpy2
+!{sys.executable} -m pip install rpy2==3.5.1
 ```
 
 Now we can import the `rpy2` module into Python and set up what is called a `magic command` to run RStudio syntax from within our Python Jupyter Notebook.
