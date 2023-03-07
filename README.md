@@ -51,7 +51,7 @@ This lab is based on that work.
 
 ## Procedure
 - [Click here](https://colab.research.google.com/drive/1oXj7TJotQ_vPtWNVVSzExo0--QEeLsw0?usp=sharing) to access the lab procedure as a Jupyter Notebook.
-- [Click here](https://rstudio.cloud/project/3480951) to access the lab procedure as an RMarkdown file via RStudio Cloud
+- [Click here](https://posit.cloud/content/3480951) to access the lab procedure as an RMarkdown file via RStudio Cloud
   * *While the primary lab procedure is written in Python, there is an RMarkdown file that runs through the same workflows from within RStudio*
   * NOTE: If working in RStudio cloud, you'll need to select the `Save a Permanent Copy` icon in the top-right hand corner to make a copy of the project.
 
