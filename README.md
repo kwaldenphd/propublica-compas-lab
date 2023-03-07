@@ -1473,5 +1473,4 @@ Other questions for the lab notebook:
 - How are you thinking about race and surveillance after this case study/lab?
 - Other comments/questions/observations
 
-I encourage folks to include code and/or screenshots as part of that narrative.
-- You are welcome (but not required) to include code as part of that narrative.
+You are welcome (but not required) to include code as part of that narrative.
