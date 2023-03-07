@@ -234,17 +234,14 @@ import matplotlib.pyplot as plt
 
 We're going to work with two datasets in this lab, both developed and published by the *ProPublica* team. In `compas-scores-two-years.csv`, the *ProPublica* team selected fields for severity of charge, number of priors, demographics, age, sex, compas scores, and whether each person was accused of a crime within two years. We can see we have 52 columns/fields, and 7,214 rows/records in this dataset.
 
+**RStudio Syntax**
+
 ```Python
 %%R
+
 # load data from CSV file using R dataframe syntax
-compas_two_year_scores <- read.csv("compas-scores-two-years.csv")
+# compas_two_year_scores <- read.csv("compas-scores-two-years.csv")
 
-# show data dimensions
-nrow(compas_two_year_scores)
-```
-
-```Python
-%%R
 # load data from URL using R dataframe syntax
 compas_two_year_scores <- read.csv("https://raw.githubusercontent.com/kwaldenphd/propublica-compas-lab/main/data/compas-scores-two-years.csv")
 
@@ -258,13 +255,8 @@ We can also express these steps programatically in Python using `pandas`:
 
 ```Python
 # load data from file
-compas_two_year_scores = pd.read_csv('compas-scores-two-years.csv', index_col=0)
+# compas_two_year_scores = pd.read_csv('compas-scores-two-years.csv', index_col=0)
 
-# show data shape
-compas_two_year_scores.shape
-```
-
-```Python
 # load data from url
 compas_two_year_scores = pd.read_csv("https://raw.githubusercontent.com/kwaldenphd/propublica-compas-lab/main/data/compas-scores-two-years.csv", index_col = 0)
 
@@ -649,14 +641,8 @@ COMPAS also offers a score that aims to measure a persons risk of violent recidi
 ```Python
 %%R
 # load data from CSV file
-compas_two_year_scores_violent <- read.csv("compas-scores-two-years-violent.csv")
+# compas_two_year_scores_violent <- read.csv("compas-scores-two-years-violent.csv")
 
-# show data dimensions
-nrow(compas_two_year_scores_violent)
-```
-
-```Python
-%%R
 # load data from URL
 compas_two_year_scores_violent <- read.csv("https://raw.githubusercontent.com/kwaldenphd/propublica-compas-lab/main/data/compas-scores-two-years-violent.csv")
 
@@ -668,13 +654,8 @@ nrow(compas_two_year_scores_violent)
 
 ```Python
 # load data from file
-compas_two_year_scores_violent = pd.read_csv('compas-scores-two-years-violent.csv', index_col=0)
+# compas_two_year_scores_violent = pd.read_csv('compas-scores-two-years-violent.csv', index_col=0)
 
-# show data shape
-compas_two_year_scores_violent.shape
-```
-
-```Python
 # load data from url
 compas_two_year_scores_violent = pd.read_csv("https://raw.githubusercontent.com/kwaldenphd/propublica-compas-lab/main/data/compas-scores-two-years-violent.csv", index_col = 0)
 
@@ -958,14 +939,8 @@ We also need to load data structured for the model. We can see this data has 13,
 ```Python
 %%R
 # load data from CSV file
-cox_parsed <- read.csv("cox-parsed.csv")
+# cox_parsed <- read.csv("cox-parsed.csv")
 
-# show data dimensions
-nrow(cox_parsed)
-```
-
-```Python
-%%R
 # load data from URL
 cox_parsed <- read.csv("https://raw.githubusercontent.com/kwaldenphd/propublica-compas-lab/main/data/cox-parsed.csv")
 
@@ -977,13 +952,8 @@ nrow(cox_parsed)
 
 ```Python
 # load data from file
-cox_parsed = pd.read_csv('cox-parsed.csv', index_col=0)
+# cox_parsed = pd.read_csv('cox-parsed.csv', index_col=0)
 
-# show data shape
-cox_parsed.shape
-```
-
-```Python
 # load data from url
 cox_parsed = pd.read_csv("https://raw.githubusercontent.com/kwaldenphd/propublica-compas-lab/main/data/cox-parsed.csv", index_col = 0)
 
