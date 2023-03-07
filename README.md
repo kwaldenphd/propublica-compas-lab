@@ -1,7 +1,6 @@
 # ProPublica COMPAS Lab
 
-<a href="http://creativecommons.org/licenses/by-nc/4.0/" rel="license"><img style="border-width: 0;" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" alt="Creative Commons License" /></a>
-This tutorial is licensed under a <a href="http://creativecommons.org/licenses/by-nc/4.0/" rel="license">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+<a href="http://creativecommons.org/licenses/by-nc/4.0/" rel="license"><img style="border-width: 0;" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" alt="Creative Commons License" /></a>This tutorial was written by Katherine Walden and is licensed under a <a href="http://creativecommons.org/licenses/by-nc/4.0/" rel="license">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
 
 ## Acknowledgements
 
@@ -24,18 +23,18 @@ Klein's lab is based on an exercise by Bucknell University Assistant Professor o
 - [The Story](#the-story)
 - [The Methodology](#the-methodology)
 - [Data Sources](#data-sources)
-- [Environment](#environment)
-- [The First Dataset](#the-first-dataset)
-- [Exploratory Data Analysis](#exploratory-data-analysis)
-- [Visualizing Risk Scores](#visualizing-risk-scores)
-- [Racial Bias in COMPAS](#racial-bias-in-compas)
-- [Risk of Violent Recidivism](#risk-of-violent-recidivism)
-- [More Exploratory Data Analysis](#more-exploratory-data-analysis)
-- [Predictive Accuracy of COMPAS](#predictive-accuracy-of-compas)
-  * [Proportional hazards model](#proportional-hazards-model)
-  * [Running the model](#running-the-model)
-- [Directions of the Racial Bias](#directions-of-the-racial-bias)
-- [Gender Differences in COMPAS Scores](#gender-differences-in-compas-scores)
+- [Algorithm Audit](#algorithm-audit)
+  - [Setup & Environment](#setup--environment)
+  - [Exploratory Data Analysis](#exploratory-data-analysis)
+    - [Visualizing Risk Scores](#visualizing-risk-scores)
+    - [Racial Bias in COMPAS](#racial-bias-in-compas)
+    - [Risk of Violent Recidivism](#risk-of-violent-recidivism)
+    - [Other Factors](#other-factors)
+  - [Predictive Accuracy of COMPAS](#predictive-accuracy-of-compas)
+    * [Proportional hazards model](#proportional-hazards-model)
+    * [Running the model](#running-the-model)
+  - [Directions of the Racial Bias](#directions-of-the-racial-bias)
+  - [Gender Differences in COMPAS Scores](#gender-differences-in-compas-scores)
 - [Putting it all together](#putting-it-all-together)
 - [Critiques of the ProPublica Project](#critiques-of-the-propublica-project)
 - [Lab Notebook Components](#lab-notebook-components)
