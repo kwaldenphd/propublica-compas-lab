@@ -1179,7 +1179,7 @@ print(nrow(vgrp))
 summary(vmodel)
 ```
 
-The *ProPublica* team found that in this case, there isn't a significant coefficient on African American's with High Scores.
+The *ProPublica* team found that in this case, there isn't a significant coefficient on Black/African American defendants with High Scores.
 
 **RStudio Syntax**
 
@@ -1236,7 +1236,7 @@ plotty(black_fit, "Black defendants")
 
 ## Directions of the Racial Bias
 
-*ProPublica*'s analysis found that the COMPAS algorithm does overpredict Black defendant's future recidivism. The next section of the lab looks at how they explored the direction of the bias. Their analysis found fine differences in overprediction and underprediction by comparing COMPAS scores across racial lines.
+*ProPublica*'s analysis found that the COMPAS algorithm does overpredict Black defendants' future recidivism. The next section of the lab looks at how they explored the direction of the bias. Their analysis found fine differences in overprediction and underprediction by comparing COMPAS scores across racial lines.
 
 To be able to run a similar program in Python, we need to load the `truth_tables.py` file with named functions created by the *ProPublica* team.
 - [Link to download](https://drive.google.com/file/d/1hH8TfJ1ADcXs7WnrVrzTNPzaoGxeN4qH/view?usp=sharing) from Google Drive
