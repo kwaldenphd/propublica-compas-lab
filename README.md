@@ -85,24 +85,24 @@ Read: Julia Angwin, Jeff Larson, Surya Mtatu, and Lauren Kirchner, “[Machine B
 Discussion questions: 
 - What stood out to you from the story? 
   * Where and how do we see race and surveillance at work?
-- From reading the story, what are you able to tell about how the authors' analyzed the technology system?
-- How do the authors describe the role/functionality/design/etc. of the technology system?
-- Other thoughts/comments/questions/observations.
+- From reading the story, what are you able to tell about how the authors analyzed the technology system?
+- How do the authors describe the design and functionality of the technology system?
+- Other comments, questions, etc.
 
 # The Methodology
 
 Read: Jeff Larson, Surya Mattu, Lauren Kirchner, and Julia Angwin, “[How We Analyzed the COMPAS Recidivism Algorithm](https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm)” *ProPublica* (23 May 2016).
 
 Discussion questions:
-- What was the goal or central questions for the study?
-- What data sources did they draw on (and why)?
-- How did they approach analyzing the algorithm? 
+- What were the goals or central questions for the study?
+- Wat data sources did they draw on (and why)?
+- How did they approach analyzing the algorithm?
   * Specific questions
   * Statistical methods
   * Visualizations/calculations
 - What conclusions do the authors draw from the analysis?
   * Connections we can make with race and surveillance?
-- Other thoughts/comments/questions/observations.
+- Other comments, questions, observations, etc.
 
 # Data Sources
 
@@ -113,13 +113,15 @@ Explore:
 - [GitHub repository with data files and Jupyter notebook for ProPublica analysis of COMPAS risk scores](https://github.com/propublica/compas-analysis)
 
 Discussion questions:
-- What data sources did they draw on?
+- What data sources did the ProPublica team draw on?
   * Who was involved in collecting this data/information?
   * Why was this data/information originally collected? Or what was the original purpose for data collection?
-- Where do we see power at work in this data/information? A lot of directions you could go with this question- how/why the data was collected, categories or classification systems used, etc.
+- Where do we see power at work in this data/information? 
+  * *A lot of directions you could go with this question- how/why the data was collected, categories or classification systems used, etc.*
 - What data points (or discrete pieces of information) are represented?
 - How did the authors organize or filter the data? What transformations happened to get from the original data source to the data structure used in the analysis?
-- Other thoughts/comments/questions/observations.
+- Other comments, questions, observations, etc.
+
 
 # Environment
 
@@ -1433,9 +1435,9 @@ Let's take a step back here and think about what these results mean, or at least
 Discussion questions:
 - What conclusions would you draw about the COMPAS algorithm based on this analysis?
 - What other types of questions would you want to ask or what else do you want to know about the algorithm?
-- How does the analysis outlined in this lab and the methodology article relate to the arguments/conclusions presented in the "Machine Bias" article?
-- Limitations or shortcomings of this analysis (the analysis itself, the statistical models used, the input data, etc.)?
-- Other thoughts/questions/comments/observations
+- How does the analysis outlined in this lab and the ProPublica methodology white paper relate to the arguments/conclusions presented in the "Machine Bias" article?
+- What limitations or shortcomings would you identify for this analysis (the analysis itself, the statistical models used, the input data, etc.)?
+- Other comments, questions, observations, etc.
 
 # Critiques of the ProPublica Project
 
@@ -1457,8 +1459,8 @@ Discussion questions:
 - What are some of your initial observations or thoughts on these critiques?
 - How do these critiques respond to or engage with the ProPublica investigation?
 - What are some of your takeaways from exploring these critiques?
-- Particularly, how are you thinking about what it looks like to analyze/investigate/hold accountable “black box” tech systems?
-- Other thoughts/comments/observations
+- Particularly, how are you thinking about what it looks like to analyze, investigate, or hold accountable “black box” tech systems?
+- Other comments, questions, observations, etc.
 
 # Lab Notebook Components
 
@@ -1472,9 +1474,10 @@ You can respond to/engage with the discussion questions embedded throughout the 
 
 Other questions for the lab notebook: 
 - What challenges did you face, and how did you solve them?
-- What did you learn about machine learning through this lab?
+- What did you learn about machine learning/predictive models through this lab?
 - How are you thinking about the *ProPublica* article and investigation after this lab?
+- How are you thinking about race and surveillance after this case study/lab?
 - Other comments/questions/observations
 
-I encourage folks to include code + screenshots as part of that narrative.
-- You are welcome (but not required) to include Python code as part of that narrative.
+I encourage folks to include code and/or screenshots as part of that narrative.
+- You are welcome (but not required) to include code as part of that narrative.
