@@ -887,7 +887,7 @@ control <- exp(-2.24274) / (1 + exp(-2.24274))
 exp(0.65893) / (1 - control + (control * exp(0.65893)))
 ```
 
-Defendands under 25 are 7.4 times as likely to get a higher score as middle aged defendants.
+Defendants under 25 are 7.4 times as likely to get a higher score as middle aged defendants.
 
 ```Python
 %%R
